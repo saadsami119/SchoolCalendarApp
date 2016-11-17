@@ -3,7 +3,7 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 
 @Component({
     moduleId: module.id,
-    selector: "nav-menu",
+    selector: "appoitnment",
     templateUrl: "appointment.component.html"
 })
 

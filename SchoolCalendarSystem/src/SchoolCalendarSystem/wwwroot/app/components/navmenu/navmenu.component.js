@@ -9,18 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var NavMenuComponent = (function () {
+    function NavMenuComponent() {
     }
-    AppComponent = __decorate([
+    NavMenuComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: 'my-app',
-            templateUrl: "app.component.html"
+            selector: 'nav-menu',
+            templateUrl: "navmenu.component.html",
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], NavMenuComponent);
+    return NavMenuComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.NavMenuComponent = NavMenuComponent;
+//# sourceMappingURL=navmenu.component.js.map

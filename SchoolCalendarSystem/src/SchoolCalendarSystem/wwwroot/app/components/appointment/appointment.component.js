@@ -28,7 +28,7 @@ var AppointmentComponent = (function () {
     AppointmentComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
-            selector: "nav-menu",
+            selector: "appoitnment",
             templateUrl: "appointment.component.html"
         }), 
         __metadata('design:paramtypes', [forms_1.FormBuilder])

@@ -14,6 +14,7 @@ var forms_1 = require('@angular/forms');
 var app_component_1 = require('./app.component');
 var appointment_component_1 = require("./components/appointment/appointment.component");
 var calendar_component_1 = require("./components/calendar/calendar.component");
+var navmenu_component_1 = require("./components/navmenu/navmenu.component");
 var ng2_datetime_1 = require('ng2-datetime/ng2-datetime');
 var router_1 = require('@angular/router');
 var appRoutes = [
@@ -30,7 +31,7 @@ var AppModule = (function () {
                 forms_1.ReactiveFormsModule,
                 router_1.RouterModule.forRoot(appRoutes),
                 ng2_datetime_1.NKDatetimeModule],
-            declarations: [app_component_1.AppComponent, appointment_component_1.AppointmentComponent, calendar_component_1.CalendarComponent],
+            declarations: [app_component_1.AppComponent, appointment_component_1.AppointmentComponent, calendar_component_1.CalendarComponent, navmenu_component_1.NavMenuComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])
