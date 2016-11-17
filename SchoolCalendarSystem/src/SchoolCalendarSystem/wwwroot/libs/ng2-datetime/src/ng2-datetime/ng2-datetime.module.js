@@ -9,25 +9,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
+var common_1 = require('@angular/common');
 var forms_1 = require('@angular/forms');
-var app_component_1 = require('./app.component');
-var appointment_component_1 = require("./components/appointment/appointment.component");
-var ng2_datetime_1 = require('ng2-datetime/ng2-datetime');
-var AppModule = (function () {
-    function AppModule() {
+var ng2_datetime_1 = require('./ng2-datetime');
+var NKDatetimeModule = (function () {
+    function NKDatetimeModule() {
     }
-    AppModule = __decorate([
+    NKDatetimeModule = __decorate([
         core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule,
-                forms_1.ReactiveFormsModule,
-                ng2_datetime_1.NKDatetimeModule],
-            declarations: [app_component_1.AppComponent, appointment_component_1.AppointmentComponent],
-            bootstrap: [app_component_1.AppComponent]
+            imports: [common_1.CommonModule, forms_1.FormsModule],
+            exports: [ng2_datetime_1.NKDatetime],
+            declarations: [ng2_datetime_1.NKDatetime]
         }), 
         __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    ], NKDatetimeModule);
+    return NKDatetimeModule;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+exports.NKDatetimeModule = NKDatetimeModule;
+//# sourceMappingURL=ng2-datetime.module.js.map

@@ -6,56 +6,85 @@ gulp.task('default', function () {
     // place code for your default task here
 });
 
-gulp.task('restore:core-js', function () {
+gulp.task('copy-dependency:core-js', function () {
     gulp.src([
         'node_modules/core-js/client/*.js'
     ]).pipe(gulp.dest(libs + 'core-js'));
 });
-gulp.task('restore:zone.js', function () {
+gulp.task('copy-dependency:zone.js', function () {
     gulp.src([
         'node_modules/zone.js/dist/*.js'
     ]).pipe(gulp.dest(libs + 'zone.js'));
 });
-gulp.task('restore:reflect-metadata', function () {
+gulp.task('copy-dependency:reflect-metadata', function () {
     gulp.src([
         'node_modules/reflect-metadata/reflect.js'
     ]).pipe(gulp.dest(libs + 'reflect-metadata'));
 });
-gulp.task('restore:systemjs', function () {
+gulp.task('copy-dependency:systemjs', function () {
     gulp.src([
         'node_modules/systemjs/dist/*.js'
     ]).pipe(gulp.dest(libs + 'systemjs'));
 });
-gulp.task('restore:rxjs', function () {
+gulp.task('copy-dependency:rxjs', function () {
     gulp.src([
         'node_modules/rxjs/**/*.js'
     ]).pipe(gulp.dest(libs + 'rxjs'));
 });
-gulp.task('restore:angular-in-memory-web-api', function () {
+gulp.task('copy-dependency:angular-in-memory-web-api', function () {
     gulp.src([
         'node_modules/angular-in-memory-web-api/**/*.js'
     ]).pipe(gulp.dest(libs + 'angular-in-memory-web-api'));
 });
-gulp.task('restore:angular', function () {
+gulp.task('copy-dependency:angular', function () {
     gulp.src([
         'node_modules/@angular/**/*.js'
     ]).pipe(gulp.dest(libs + '@angular'));
 });
-gulp.task('restore:bootstrap', function () {
+gulp.task('copy-dependency:bootstrap', function () {
     gulp.src([
         'node_modules/bootstrap/dist/**/*.*'
     ]).pipe(gulp.dest(libs + 'bootstrap'));
 });
+gulp.task('copy-dependency:jquery', function () {
+    gulp.src([
+        'node_modules/jquery/dist/jquery.min.js'
+    ]).pipe(gulp.dest(libs + 'jquery'));
+});
 
-gulp.task('restore', [
-    'restore:core-js',
-    'restore:zone.js',
-    'restore:reflect-metadata',
-    'restore:systemjs',
-    'restore:rxjs',
-    'restore:angular-in-memory-web-api',
-    'restore:angular',
-    'restore:bootstrap'
+gulp.task('copy-dependency:angular2-datetime-picker', function () {
+
+    gulp.src([
+          'node_modules/bootstrap-datepicker/dist/css/bootstrap-datepicker3.min.css'
+    ]).pipe(gulp.dest(libs + 'ng2-datetime'));
+    gulp.src([
+        'node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.js'
+    ]).pipe(gulp.dest(libs + 'ng2-datetime'));
+
+    gulp.src([
+        'node_modules/bootstrap-timepicker/css/bootstrap-timepicker.min.css'
+    ]).pipe(gulp.dest(libs + 'ng2-datetime'));
+    gulp.src([
+        'node_modules/bootstrap-timepicker/js/bootstrap-timepicker.min.js'
+    ]).pipe(gulp.dest(libs + 'ng2-datetime'));
+
+    gulp.src([
+          'node_modules/ng2-datetime/**/*.js'
+    ]).pipe(gulp.dest(libs + 'ng2-datetime'));
+
+});
+
+gulp.task('copy-dependencies', [
+    'copy-dependency:core-js',
+    'copy-dependency:zone.js',
+    'copy-dependency:reflect-metadata',
+    'copy-dependency:systemjs',
+    'copy-dependency:rxjs',
+    'copy-dependency:angular-in-memory-web-api',
+    'copy-dependency:angular',
+    'copy-dependency:bootstrap',
+    'copy-dependency:jquery',
+    'copy-dependency:angular2-datetime-picker'
 ]);
 
 //var gulp = require('gulp');

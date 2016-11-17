@@ -1,0 +1,40 @@
+﻿<div>
+    <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">New Appointment</div>
+            <div class="panel-body">
+                <form [formGroup]="appointmentForm">
+                    <div formGroupName="startDateTime" class="row form-group" [ngClass]="{'has-error': !appointmentForm.controls.startDateTime.controls.date.valid || !appointmentForm.controls.startDateTime.controls.time.valid}">
+                        <div class="col-md-3">
+                            <label>Start on </label>
+                            <datetime formControlName="date" [timepicker]="false"></datetime>
+                        </div>
+                        <div class="col-md-3">
+                            <label>at </label>
+                            <datetime formControlName="time" [datepicker]="false"></datetime>
+                        </div>
+                    </div>
+                    <div formGroupName="endDateTime" class="row form-group" [ngClass]="{'has-error': !appointmentForm.controls.endDateTime.controls.date.valid || !appointmentForm.controls.endDateTime.controls.time.valid}">
+                        <div class="col-md-3">
+                            <label>End on </label>
+                            <datetime formControlName="date" [timepicker]="false"></datetime>
+                        </div>
+                        <div class="col-md-3">
+                            <label>at </label>
+                            <datetime formControlName="time" [datepicker]="false"></datetime>
+                        </div>
+                    </div>
+                    <div class="form-group" [ngClass]="{'has-error': !appointmentForm.controls.description.valid}">
+                        <label>Description</label>
+                        <textarea rows="4" formControlName="description" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary col-md-offset-10" [disabled]="!appointmentForm.valid">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    </div>
+    
+</div>
