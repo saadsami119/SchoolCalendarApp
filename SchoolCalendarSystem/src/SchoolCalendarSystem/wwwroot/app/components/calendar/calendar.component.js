@@ -9,17 +9,18 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var AppComponent = (function () {
-    function AppComponent() {
+var CalendarComponent = (function () {
+    function CalendarComponent() {
     }
-    AppComponent = __decorate([
+    CalendarComponent = __decorate([
         core_1.Component({
-            selector: 'my-app',
-            template: "<div class='col-sm - 9 body-content'><router-outlet > </router-outlet></div>"
+            moduleId: module.id,
+            selector: "calendar",
+            template: "<h1>Hello World</h1>"
         }), 
         __metadata('design:paramtypes', [])
-    ], AppComponent);
-    return AppComponent;
+    ], CalendarComponent);
+    return CalendarComponent;
 }());
-exports.AppComponent = AppComponent;
-//# sourceMappingURL=app.component.js.map
+exports.CalendarComponent = CalendarComponent;
+//# sourceMappingURL=calendar.component.js.map

@@ -13,7 +13,14 @@ var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var app_component_1 = require('./app.component');
 var appointment_component_1 = require("./components/appointment/appointment.component");
+var calendar_component_1 = require("./components/calendar/calendar.component");
 var ng2_datetime_1 = require('ng2-datetime/ng2-datetime');
+var router_1 = require('@angular/router');
+var appRoutes = [
+    { path: '', redirectTo: 'calendar', pathMatch: 'full' },
+    { path: 'calendar', component: calendar_component_1.CalendarComponent },
+    { path: 'appointment', component: appointment_component_1.AppointmentComponent }
+];
 var AppModule = (function () {
     function AppModule() {
     }
@@ -21,8 +28,9 @@ var AppModule = (function () {
         core_1.NgModule({
             imports: [platform_browser_1.BrowserModule,
                 forms_1.ReactiveFormsModule,
+                router_1.RouterModule.forRoot(appRoutes),
                 ng2_datetime_1.NKDatetimeModule],
-            declarations: [app_component_1.AppComponent, appointment_component_1.AppointmentComponent],
+            declarations: [app_component_1.AppComponent, appointment_component_1.AppointmentComponent, calendar_component_1.CalendarComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

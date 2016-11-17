@@ -2,6 +2,6 @@
 
 @Component({
     selector: 'my-app',
-    template: '<div><nav-menu></nav-menu></div>'
-})
+    template: "<div class='col-sm - 9 body-content'><router-outlet > </router-outlet></div>"
+    })
 export class AppComponent { }
