@@ -1,7 +1,7 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppComponent } from './app.component';
+import { AppComponent } from './components/app/app.component';
 import { AppointmentComponent } from "./components/appointment/appointment.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import { NavMenuComponent } from "./components/navmenu/navmenu.component";
