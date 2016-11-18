@@ -9,18 +9,89 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+var calendarService_1 = require('../../services/calendarService');
 var CalendarComponent = (function () {
-    function CalendarComponent() {
+    function CalendarComponent(calendarService) {
+        this.calendarService = calendarService;
+        this.selectedMonthName = new Date().toLocaleString("en-us", { month: "long" });
+        this.selectedMonthIndex = new Date().getMonth();
+        this.selectedJahr = new Date().getFullYear();
+        this.setCalendarForMonth(this.selectedMonthIndex);
     }
+    CalendarComponent.prototype.setCalendarForMonth = function (month) {
+        var monthStartingDate = new Date(this.selectedJahr, this.selectedMonthIndex, 1).getDate();
+        var monthEndindDate = new Date(this.selectedJahr, 1 + this.selectedMonthIndex, 0).getDate();
+        var calendarweek = new CalendarWeek();
+        this.calendarMonth = new CalendarMonth();
+        for (var i = monthStartingDate; i <= monthEndindDate; i++) {
+            var date = new Date(this.selectedJahr, this.selectedMonthIndex, i);
+            var dayName = date.toLocaleString('en-us', { weekday: 'long' });
+            switch (dayName) {
+                case "Monday":
+                    calendarweek.monday = date.getDate().toString();
+                    break;
+                case "Tuesday":
+                    calendarweek.tuesday = date.getDate().toString();
+                    break;
+                case "Wednesday":
+                    calendarweek.wednesday = date.getDate().toString();
+                    break;
+                case "Thursday":
+                    calendarweek.thursday = date.getDate().toString();
+                    break;
+                case "Friday":
+                    calendarweek.friday = date.getDate().toString();
+                    break;
+                case "Saturday":
+                    calendarweek.saturday = date.getDate().toString();
+                    break;
+                case "Sunday":
+                    calendarweek.sunday = date.getDate().toString();
+                    break;
+                default:
+            }
+            if (dayName === "Sunday") {
+                this.calendarMonth.weeks.push(calendarweek);
+                calendarweek = new CalendarWeek();
+            }
+        }
+        this.calendarMonth.weeks.push(calendarweek);
+    };
+    CalendarComponent.prototype.setNextMonthName = function () {
+        this.selectedJahr = this.selectedJahr + Math.floor((this.selectedMonthIndex + 1) / 12);
+        this.selectedMonthIndex = (this.selectedMonthIndex + 1) === 12 ? (this.selectedMonthIndex + 1) % 12 : (this.selectedMonthIndex + 1);
+        this.selectedMonthName = new Date(this.selectedJahr, this.selectedMonthIndex, 1).toLocaleString("en-us", { month: "long" });
+        this.setCalendarForMonth(this.selectedMonthIndex);
+    };
+    CalendarComponent.prototype.setPreviousMonthName = function () {
+        this.selectedJahr = this.selectedJahr + Math.floor((this.selectedMonthIndex - 1) / 12);
+        this.selectedMonthIndex = (this.selectedMonthIndex - 1) === 12 ? (this.selectedMonthIndex - 1) % 12 : (this.selectedMonthIndex - 1);
+        this.selectedMonthName = new Date(this.selectedJahr, this.selectedMonthIndex, 1).toLocaleString("en-us", { month: "long" });
+        this.setCalendarForMonth(this.selectedMonthIndex);
+    };
     CalendarComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: "calendar",
-            template: "<h1>Hello World</h1>"
+            templateUrl: "calendar.component.html",
+            providers: [calendarService_1.CalendarService]
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [calendarService_1.CalendarService])
     ], CalendarComponent);
     return CalendarComponent;
 }());
 exports.CalendarComponent = CalendarComponent;
+var CalendarWeek = (function () {
+    function CalendarWeek() {
+    }
+    return CalendarWeek;
+}());
+exports.CalendarWeek = CalendarWeek;
+var CalendarMonth = (function () {
+    function CalendarMonth() {
+        this.weeks = new Array();
+    }
+    return CalendarMonth;
+}());
+exports.CalendarMonth = CalendarMonth;
 //# sourceMappingURL=calendar.component.js.map
