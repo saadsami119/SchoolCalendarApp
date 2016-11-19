@@ -9,15 +9,22 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var calendarService_1 = require('../../services/calendarService');
+var calendar_service_1 = require('../../services/calendar.service');
+var auth_service_1 = require('../../services/auth.service');
 var CalendarComponent = (function () {
-    function CalendarComponent(calendarService) {
+    function CalendarComponent(calendarService, authService) {
         this.calendarService = calendarService;
+        this.authService = authService;
+        if (authService.isUserNotAuthenticated()) {
+            authService.redirectToLogin();
+        }
+    }
+    CalendarComponent.prototype.ngOnInit = function () {
         this.selectedMonthName = new Date().toLocaleString("en-us", { month: "long" });
         this.selectedMonthIndex = new Date().getMonth();
         this.selectedJahr = new Date().getFullYear();
         this.setCalendarForMonth(this.selectedMonthIndex);
-    }
+    };
     CalendarComponent.prototype.setCalendarForMonth = function (month) {
         var monthStartingDate = new Date(this.selectedJahr, this.selectedMonthIndex, 1).getDate();
         var monthEndindDate = new Date(this.selectedJahr, 1 + this.selectedMonthIndex, 0).getDate();
@@ -74,9 +81,9 @@ var CalendarComponent = (function () {
             moduleId: module.id,
             selector: "calendar",
             templateUrl: "calendar.component.html",
-            providers: [calendarService_1.CalendarService]
+            providers: [calendar_service_1.CalendarService, auth_service_1.AuthService]
         }), 
-        __metadata('design:paramtypes', [calendarService_1.CalendarService])
+        __metadata('design:paramtypes', [calendar_service_1.CalendarService, auth_service_1.AuthService])
     ], CalendarComponent);
     return CalendarComponent;
 }());

@@ -35,7 +35,8 @@
     "zone.js": "0.6.25",
     "bootstrap-datepicker": "1.6.4",
     "bootstrap-timepicker": "0.5.2",
-    "ng2-datetime": "1.2.1"
+    "ng2-datetime": "1.2.1",
+    "ng2-cookies": "1.0.3"
   },
   "devDependencies": {
     "concurrently": "3.0.0",

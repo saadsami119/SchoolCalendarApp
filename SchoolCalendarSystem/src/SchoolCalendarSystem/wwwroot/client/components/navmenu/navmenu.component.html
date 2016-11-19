@@ -13,16 +13,22 @@
         <div class='navbar-collapse collapse'>
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/appointment']">
+                    <a  class="disabled"  [routerLink]="['/appointment']">
                         <span class='glyphicon glyphicon-home'></span> New Appointment
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a [routerLink]="['/calendar']">
+                    <a class="disabled" [routerLink]="['/calendar']">" 
                         <span class='glyphicon glyphicon-education'></span> Calendar
                     </a>
                 </li>
-              
+
+                <li [routerLinkActive]="['link-active']">
+                    <a [routerLink]="['/calendar']">
+                        <span class='glyphicon glyphicon-education'></span> Saad Sami
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>

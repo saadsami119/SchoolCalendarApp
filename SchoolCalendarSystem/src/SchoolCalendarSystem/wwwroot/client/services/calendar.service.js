@@ -20,4 +20,4 @@ var CalendarService = (function () {
     return CalendarService;
 }());
 exports.CalendarService = CalendarService;
-//# sourceMappingURL=calendarService.js.map
+//# sourceMappingURL=calendar.service.js.map

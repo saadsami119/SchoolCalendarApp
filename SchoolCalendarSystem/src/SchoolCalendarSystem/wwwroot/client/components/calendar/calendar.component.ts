@@ -1,30 +1,37 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import { Appointment } from "../../models/appointment";
-import { CalendarService } from '../../services/calendarService';
+import { CalendarService } from '../../services/calendar.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
     moduleId: module.id,
     selector: "calendar",
     templateUrl: "calendar.component.html",
-    providers: [CalendarService]
+    providers: [CalendarService, AuthService]
 })
 
-export class CalendarComponent {
+export class CalendarComponent implements OnInit {
 
     public calendarMonth: CalendarMonth;
     public selectedMonthIndex: number;
-    public selectedMonthName : string;
+    public selectedMonthName: string;
     public selectedJahr: number;
 
-    constructor(private calendarService: CalendarService) {
+    constructor(private calendarService: CalendarService, private authService: AuthService) {
+        if (authService.isUserNotAuthenticated()) {
+            authService.redirectToLogin();
+        }
+    }
+
+    ngOnInit() {
         this.selectedMonthName = new Date().toLocaleString("en-us", { month: "long" });
         this.selectedMonthIndex = new Date().getMonth();
         this.selectedJahr = new Date().getFullYear();
         this.setCalendarForMonth(this.selectedMonthIndex);
     }
-    
-    setCalendarForMonth(month : number): void {
+
+    setCalendarForMonth(month: number): void {
         let monthStartingDate = new Date(this.selectedJahr, this.selectedMonthIndex, 1).getDate();
         let monthEndindDate = new Date(this.selectedJahr, 1 + this.selectedMonthIndex, 0).getDate();
         let calendarweek: CalendarWeek = new CalendarWeek();
@@ -68,7 +75,7 @@ export class CalendarComponent {
     }
 
     setNextMonthName(): void {
-        this.selectedJahr = this.selectedJahr + Math.floor((this.selectedMonthIndex+1) / 12);
+        this.selectedJahr = this.selectedJahr + Math.floor((this.selectedMonthIndex + 1) / 12);
         this.selectedMonthIndex = (this.selectedMonthIndex + 1) === 12 ? (this.selectedMonthIndex + 1) % 12 : (this.selectedMonthIndex + 1);
         this.selectedMonthName = new Date(this.selectedJahr, this.selectedMonthIndex, 1).toLocaleString("en-us", { month: "long" });
         this.setCalendarForMonth(this.selectedMonthIndex);
@@ -80,6 +87,7 @@ export class CalendarComponent {
         this.selectedMonthName = new Date(this.selectedJahr, this.selectedMonthIndex, 1).toLocaleString("en-us", { month: "long" });
         this.setCalendarForMonth(this.selectedMonthIndex);
     }
+
 }
 
 export class CalendarWeek {

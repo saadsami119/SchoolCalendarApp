@@ -73,6 +73,11 @@ gulp.task('copy-dependency:angular2-datetime-picker', function () {
     ]).pipe(gulp.dest(libs + 'ng2-datetime'));
 
 });
+gulp.task('copy-dependency:ng2-cookies', function () {
+    gulp.src([
+          'node_modules/ng2-cookies/**/*.js'
+    ]).pipe(gulp.dest(libs + 'ng2-cookies'));
+});
 
 gulp.task('copy-dependencies', [
     'copy-dependency:core-js',
@@ -84,7 +89,8 @@ gulp.task('copy-dependencies', [
     'copy-dependency:angular',
     'copy-dependency:bootstrap',
     'copy-dependency:jquery',
-    'copy-dependency:angular2-datetime-picker'
+    'copy-dependency:angular2-datetime-picker',
+    'copy-dependency:ng2-cookies'
 ]);
 
 //var gulp = require('gulp');

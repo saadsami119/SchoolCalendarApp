@@ -17,10 +17,12 @@ var calendar_component_1 = require("./components/calendar/calendar.component");
 var navmenu_component_1 = require("./components/navmenu/navmenu.component");
 var ng2_datetime_1 = require('ng2-datetime/ng2-datetime');
 var router_1 = require('@angular/router');
+var login_component_1 = require('./components/login/login.component');
 var appRoutes = [
     { path: '', redirectTo: 'calendar', pathMatch: 'full' },
     { path: 'calendar', component: calendar_component_1.CalendarComponent },
-    { path: 'appointment', component: appointment_component_1.AppointmentComponent }
+    { path: 'appointment', component: appointment_component_1.AppointmentComponent },
+    { path: 'login', component: login_component_1.LoginComponent }
 ];
 var AppModule = (function () {
     function AppModule() {
@@ -31,7 +33,7 @@ var AppModule = (function () {
                 forms_1.ReactiveFormsModule,
                 router_1.RouterModule.forRoot(appRoutes),
                 ng2_datetime_1.NKDatetimeModule],
-            declarations: [app_component_1.AppComponent, appointment_component_1.AppointmentComponent, calendar_component_1.CalendarComponent, navmenu_component_1.NavMenuComponent],
+            declarations: [app_component_1.AppComponent, appointment_component_1.AppointmentComponent, calendar_component_1.CalendarComponent, navmenu_component_1.NavMenuComponent, login_component_1.LoginComponent],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

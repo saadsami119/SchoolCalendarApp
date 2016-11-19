@@ -7,20 +7,22 @@ import { CalendarComponent } from "./components/calendar/calendar.component";
 import { NavMenuComponent } from "./components/navmenu/navmenu.component";
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { RouterModule, Routes } from '@angular/router';
+import {LoginComponent} from './components/login/login.component';
 
 const appRoutes: Routes = [
-    
-    { path: '', redirectTo: 'calendar', pathMatch: 'full'},
+
+    { path: '', redirectTo: 'calendar', pathMatch: 'full' },
     { path: 'calendar', component: CalendarComponent },
-    { path: 'appointment', component: AppointmentComponent }
+    { path: 'appointment', component: AppointmentComponent },
+    { path: 'login', component: LoginComponent}
 ];
-    
+
 @NgModule({
     imports: [BrowserModule,
-             ReactiveFormsModule,
-             RouterModule.forRoot(appRoutes),
+        ReactiveFormsModule,
+        RouterModule.forRoot(appRoutes),
         NKDatetimeModule],
-    declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent],
+    declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent,LoginComponent],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
