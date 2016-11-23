@@ -1,6 +1,8 @@
 ﻿import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { HttpService } from './services/http.service';
 import { AppComponent } from './components/app/app.component';
 import { AppointmentComponent } from "./components/appointment/appointment.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
@@ -19,10 +21,11 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [BrowserModule,
+        HttpModule,
         ReactiveFormsModule,
         RouterModule.forRoot(appRoutes),
         NKDatetimeModule],
-    declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent,LoginComponent],
+    declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent, LoginComponent],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
