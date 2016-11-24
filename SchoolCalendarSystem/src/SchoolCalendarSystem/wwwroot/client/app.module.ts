@@ -26,6 +26,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
         NKDatetimeModule],
     declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent, LoginComponent],
+    providers: [HttpService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

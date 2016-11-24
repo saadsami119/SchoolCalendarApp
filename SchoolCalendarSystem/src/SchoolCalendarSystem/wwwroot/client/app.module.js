@@ -12,6 +12,7 @@ var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
 var http_1 = require('@angular/http');
+var http_service_1 = require('./services/http.service');
 var app_component_1 = require('./components/app/app.component');
 var appointment_component_1 = require("./components/appointment/appointment.component");
 var calendar_component_1 = require("./components/calendar/calendar.component");
@@ -36,6 +37,7 @@ var AppModule = (function () {
                 router_1.RouterModule.forRoot(appRoutes),
                 ng2_datetime_1.NKDatetimeModule],
             declarations: [app_component_1.AppComponent, appointment_component_1.AppointmentComponent, calendar_component_1.CalendarComponent, navmenu_component_1.NavMenuComponent, login_component_1.LoginComponent],
+            providers: [http_service_1.HttpService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

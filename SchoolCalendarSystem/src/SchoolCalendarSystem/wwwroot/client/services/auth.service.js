@@ -11,26 +11,14 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require("@angular/core");
 var ng2_cookies_1 = require('ng2-cookies/ng2-cookies');
 var router_1 = require('@angular/router');
-var http_1 = require('@angular/http');
-var Observable_1 = require('rxjs/Observable');
-//import { HttpService} from "./http.service";
+var http_service_1 = require("./http.service");
 var AuthService = (function () {
-    function AuthService(router, http) {
+    function AuthService(router, httpService) {
         this.router = router;
-        this.http = http;
-        this.router = router;
+        this.httpService = httpService;
     }
     AuthService.prototype.authenticateUser = function (user) {
-        var _this = this;
-        return this.http.get("/api/account/login")
-            .map(function (response) {
-            var responseData = response.json();
-            if (responseData.successful === false) {
-                throw new Error(responseData.error);
-            }
-            return responseData.data;
-        })
-            .catch(function (error) { return _this.handleError(error); });
+        return this.httpService.get("/api/account/login");
     };
     AuthService.prototype.isUserNotAuthenticated = function () {
         return ng2_cookies_1.Cookie.get('userid') === null;
@@ -39,30 +27,11 @@ var AuthService = (function () {
         this.router.navigate(['/login']);
     };
     AuthService.prototype.isUserSignedIn = function () {
-        return false;
-    };
-    //private extractData(res: Response) {
-    //    let body = res.json();
-    //    console.log(body.successful);
-    //    return body.successful;
-    //}
-    AuthService.prototype.handleError = function (error) {
-        // In a real world app, we might use a remote logging infrastructure
-        var errMsg;
-        if (error instanceof http_1.Response) {
-            var body = error.json() || '';
-            var err = body.error || JSON.stringify(body);
-            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
-        }
-        else {
-            errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
-        return Observable_1.Observable.throw(errMsg);
+        return ng2_cookies_1.Cookie.get('userid') === null;
     };
     AuthService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [router_1.Router, http_1.Http])
+        __metadata('design:paramtypes', [router_1.Router, http_service_1.HttpService])
     ], AuthService);
     return AuthService;
 }());

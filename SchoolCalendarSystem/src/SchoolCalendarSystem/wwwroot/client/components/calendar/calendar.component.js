@@ -9,11 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-var calendar_service_1 = require('../../services/calendar.service');
 var auth_service_1 = require('../../services/auth.service');
 var CalendarComponent = (function () {
-    function CalendarComponent(calendarService, authService) {
-        this.calendarService = calendarService;
+    function CalendarComponent(authService) {
         this.authService = authService;
         if (authService.isUserNotAuthenticated()) {
             authService.redirectToLogin();
@@ -81,9 +79,9 @@ var CalendarComponent = (function () {
             moduleId: module.id,
             selector: "calendar",
             templateUrl: "calendar.component.html",
-            providers: [calendar_service_1.CalendarService, auth_service_1.AuthService]
+            providers: [auth_service_1.AuthService]
         }), 
-        __metadata('design:paramtypes', [calendar_service_1.CalendarService, auth_service_1.AuthService])
+        __metadata('design:paramtypes', [auth_service_1.AuthService])
     ], CalendarComponent);
     return CalendarComponent;
 }());

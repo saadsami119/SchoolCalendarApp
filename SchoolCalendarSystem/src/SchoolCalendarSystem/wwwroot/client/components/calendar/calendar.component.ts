@@ -1,6 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { Appointment } from "../../models/appointment";
-import { CalendarService } from '../../services/calendar.service';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 
@@ -8,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
     moduleId: module.id,
     selector: "calendar",
     templateUrl: "calendar.component.html",
-    providers: [CalendarService, AuthService]
+    providers: [AuthService]
 })
 
 export class CalendarComponent implements OnInit {
@@ -18,7 +17,7 @@ export class CalendarComponent implements OnInit {
     public selectedMonthName: string;
     public selectedJahr: number;
 
-    constructor(private calendarService: CalendarService, private authService: AuthService) {
+    constructor(private authService: AuthService) {
         if (authService.isUserNotAuthenticated()) {
             authService.redirectToLogin();
         }

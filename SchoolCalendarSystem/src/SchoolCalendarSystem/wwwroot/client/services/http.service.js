@@ -8,15 +8,38 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var http_1 = require('@angular/http');
+var core_1 = require("@angular/core");
+var http_1 = require("@angular/http");
+var Observable_1 = require("rxjs/Observable");
 var HttpService = (function () {
     function HttpService(http) {
         this.http = http;
-        this.domain = "";
     }
     HttpService.prototype.get = function (url) {
-        return this.http.get(url);
+        var _this = this;
+        return this.http.get(url)
+            .map(function (res) { return _this.convertToJsonResponse(res); })
+            .catch(function (error) { return _this.parseErrorMsg(error); });
+    };
+    HttpService.prototype.parseErrorMsg = function (error) {
+        var errMsg;
+        if (error instanceof http_1.Response) {
+            var body = error.json() || '';
+            var err = body.error || JSON.stringify(body);
+            errMsg = error.status + " - " + (error.statusText || '') + " " + err;
+        }
+        else {
+            errMsg = error.message ? error.message : error.toString();
+        }
+        console.error(errMsg);
+        return Observable_1.Observable.throw(errMsg);
+    };
+    HttpService.prototype.convertToJsonResponse = function (res) {
+        var resJson = res.json();
+        if (resJson.successful === false) {
+            throw new Error(resJson.error);
+        }
+        return resJson.data;
     };
     HttpService = __decorate([
         core_1.Injectable(), 

@@ -29,7 +29,7 @@ var LoginComponent = (function () {
                 _this._authService.redirectToLogin();
             }
         }, function (error) {
-            console.log(error);
+            alert(error);
         });
     };
     LoginComponent = __decorate([

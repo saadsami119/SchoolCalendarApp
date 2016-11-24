@@ -31,7 +31,7 @@ export class LoginComponent {
                     this._authService.redirectToLogin();
                 }
             }, error => {
-                console.log(error);
+                alert(error);
             });
 
 
