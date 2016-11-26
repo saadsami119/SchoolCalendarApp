@@ -14,7 +14,6 @@ var CalendarComponent = (function () {
     function CalendarComponent(authService) {
         this.authService = authService;
         if (authService.isUserNotAuthenticated()) {
-            authService.redirectToLogin();
         }
     }
     CalendarComponent.prototype.ngOnInit = function () {

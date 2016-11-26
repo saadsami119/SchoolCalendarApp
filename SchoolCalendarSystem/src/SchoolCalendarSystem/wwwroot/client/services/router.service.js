@@ -9,23 +9,19 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var ng2_cookies_1 = require('ng2-cookies/ng2-cookies');
-var http_service_1 = require("./http.service");
-var AuthService = (function () {
-    function AuthService(httpService) {
-        this.httpService = httpService;
+var router_1 = require('@angular/router');
+var RouterService = (function () {
+    function RouterService(router) {
+        this.router = router;
     }
-    AuthService.prototype.authenticateUser = function (user) {
-        return this.httpService.get("/api/account/login");
+    RouterService.prototype.navigateToRoute = function (route) {
+        this.router.navigate([route]);
     };
-    AuthService.prototype.isUserNotAuthenticated = function () {
-        return ng2_cookies_1.Cookie.get('userid') === null;
-    };
-    AuthService = __decorate([
+    RouterService = __decorate([
         core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_service_1.HttpService])
-    ], AuthService);
-    return AuthService;
+        __metadata('design:paramtypes', [router_1.Router])
+    ], RouterService);
+    return RouterService;
 }());
-exports.AuthService = AuthService;
-//# sourceMappingURL=auth.service.js.map
+exports.RouterService = RouterService;
+//# sourceMappingURL=router.service.js.map

@@ -19,7 +19,6 @@ export class CalendarComponent implements OnInit {
 
     constructor(private authService: AuthService) {
         if (authService.isUserNotAuthenticated()) {
-            authService.redirectToLogin();
         }
     }
 

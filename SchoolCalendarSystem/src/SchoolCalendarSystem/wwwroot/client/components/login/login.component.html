@@ -1,16 +1,27 @@
-﻿<div>
+﻿<!--<p *myUnless="true">
+    condition is false and myUnless is true.
+</p>
+<p *myUnless="false">
+    condition is true and myUnless is false.
+</p>-->
+
+<div>
+    <toast [type]='toast.type' [message]='toast.message' [caption]='toast.caption' [show]='toast.show'></toast>
+</div>
+
+<div>
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">Login Form</div>
             <div class="panel-body">
-                <form [formGroup]="loginForm" >
+                <form [formGroup]="loginForm">
                     <div class="form-group" [ngClass]="{'has-error': !loginForm.controls.username.valid}">
                         <label>Email</label>
-                        <input type="email" formControlName="username" class="form-control"/>
+                        <input type="email" formControlName="username" class="form-control" />
                     </div>
                     <div class="form-group" [ngClass]="{'has-error': !loginForm.controls.password.valid}">
                         <label>Password</label>
-                        <input type="password" formControlName="password" class="form-control"/>
+                        <input type="password" formControlName="password" class="form-control" />
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary col-md-offset-10" (click)="loginUser(loginForm.value, loginForm.valid)" [disabled]="!loginForm.valid">Login</button>

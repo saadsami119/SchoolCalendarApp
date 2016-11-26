@@ -11,17 +11,21 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var platform_browser_1 = require('@angular/platform-browser');
 var forms_1 = require('@angular/forms');
+var router_1 = require('@angular/router');
+var ng2_datetime_1 = require('ng2-datetime/ng2-datetime');
 var http_1 = require('@angular/http');
 var http_service_1 = require('./services/http.service');
+var router_service_1 = require('./services/router.service');
+var auth_service_1 = require("./services/auth.service");
 var app_component_1 = require('./components/app/app.component');
 var appointment_component_1 = require("./components/appointment/appointment.component");
 var calendar_component_1 = require("./components/calendar/calendar.component");
 var navmenu_component_1 = require("./components/navmenu/navmenu.component");
-var ng2_datetime_1 = require('ng2-datetime/ng2-datetime');
-var router_1 = require('@angular/router');
 var login_component_1 = require('./components/login/login.component');
+var toast_component_1 = require("./components/toast/toast.component");
+var alert_directive_1 = require("./directives/alert.directive");
 var appRoutes = [
-    { path: '', redirectTo: 'calendar', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'calendar', component: calendar_component_1.CalendarComponent },
     { path: 'appointment', component: appointment_component_1.AppointmentComponent },
     { path: 'login', component: login_component_1.LoginComponent }
@@ -36,8 +40,8 @@ var AppModule = (function () {
                 forms_1.ReactiveFormsModule,
                 router_1.RouterModule.forRoot(appRoutes),
                 ng2_datetime_1.NKDatetimeModule],
-            declarations: [app_component_1.AppComponent, appointment_component_1.AppointmentComponent, calendar_component_1.CalendarComponent, navmenu_component_1.NavMenuComponent, login_component_1.LoginComponent],
-            providers: [http_service_1.HttpService],
+            declarations: [app_component_1.AppComponent, appointment_component_1.AppointmentComponent, calendar_component_1.CalendarComponent, navmenu_component_1.NavMenuComponent, login_component_1.LoginComponent, toast_component_1.ToastComponent, alert_directive_1.UnlessDirective],
+            providers: [http_service_1.HttpService, router_service_1.RouterService, auth_service_1.AuthService],
             bootstrap: [app_component_1.AppComponent]
         }), 
         __metadata('design:paramtypes', [])

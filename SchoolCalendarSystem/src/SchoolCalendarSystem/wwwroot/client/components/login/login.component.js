@@ -11,35 +11,37 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
 var auth_service_1 = require("../../services/auth.service");
+var router_service_1 = require("../../services/router.service");
+var toast_model_1 = require("../../models/toast.model");
 var LoginComponent = (function () {
-    // TODO : ngInit
-    function LoginComponent(_fb, authService) {
-        this._fb = _fb;
-        this._authService = authService;
-        this.loginForm = _fb.group({
+    function LoginComponent(formBuilder, authService, routerService) {
+        this.formBuilder = formBuilder;
+        this.authService = authService;
+        this.routerService = routerService;
+    }
+    LoginComponent.prototype.ngOnInit = function () {
+        this.loginForm = this.formBuilder.group({
             username: ['asa@rer.com', forms_1.Validators.required],
             password: ['asa', forms_1.Validators.required]
         });
-    }
+        this.toast = new toast_model_1.Toast();
+    };
     LoginComponent.prototype.loginUser = function (user, isValid) {
         var _this = this;
-        this._authService.authenticateUser(user)
+        this.authService.authenticateUser(user)
             .subscribe(function (isUserAuthenticated) {
             if (!isUserAuthenticated) {
-                _this._authService.redirectToLogin();
+                _this.routerService.navigateToRoute("Login");
             }
-        }, function (error) {
-            alert(error);
-        });
+        }, function (error) { _this.toast.errorToast(error, "caption"); });
     };
     LoginComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: "login",
-            templateUrl: "login.component.html",
-            providers: [auth_service_1.AuthService]
+            templateUrl: "login.component.html"
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder, auth_service_1.AuthService])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, auth_service_1.AuthService, router_service_1.RouterService])
     ], LoginComponent);
     return LoginComponent;
 }());
