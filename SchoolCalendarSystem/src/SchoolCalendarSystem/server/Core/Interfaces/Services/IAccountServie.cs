@@ -4,7 +4,7 @@ namespace SchoolCalendarSystem.server.Core.Interfaces.Services
 {
     public interface IAccountServie
     {
-        void VerifyUser(User user);
+        bool IsAuthenticUser(User user);
         void RegisterUser(User user);
 
     }

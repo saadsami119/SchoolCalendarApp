@@ -21,6 +21,14 @@ var HttpService = (function () {
             .map(function (res) { return _this.convertToJsonResponse(res); })
             .catch(function (error) { return _this.parseErrorMsg(error); });
     };
+    HttpService.prototype.post = function (url, data) {
+        var _this = this;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(url, data, options)
+            .map(function (res) { return _this.convertToJsonResponse(res); })
+            .catch(function (error) { return _this.parseErrorMsg(error); });
+    };
     HttpService.prototype.parseErrorMsg = function (error) {
         var errMsg;
         if (error instanceof http_1.Response) {

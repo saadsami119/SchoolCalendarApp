@@ -11,15 +11,15 @@ namespace SchoolCalendarSystem.server.Core.Services
     public class AccountService : IAccountServie
     {
         private readonly IRepository<User> _useRepository;
-        
+
         public AccountService(IUnitOfWork uow)
         {
             _useRepository = uow.UserRepository;
         }
-        
-        public void VerifyUser(User user)
+
+        public bool IsAuthenticUser(User user)
         {
-            this._useRepository.SingleOrDefault(u=>u.Password == user.Username && u.Password == user.Password);  
+            return this._useRepository.SingleOrDefault(u => u.Password == user.Username && u.Password == user.Password) != null;
         }
 
         public void RegisterUser(User user)

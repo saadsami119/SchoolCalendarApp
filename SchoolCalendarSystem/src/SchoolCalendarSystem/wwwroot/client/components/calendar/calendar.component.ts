@@ -1,5 +1,5 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { Appointment } from "../../models/appointment";
+import { Appointment } from "../../models/appointment.model";
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 

@@ -6,9 +6,11 @@ namespace SchoolCalendarSystem.server.Core
     public class UnitOfWork : IUnitOfWork
     {
         private readonly IDatabaseContext _dbContext;
-        public IRepository<User> UserRepository { get; set; }
 
-        public UnitOfWork(IDatabaseContext databaseContext)
+        public IRepository<User> UserRepository => new Repository<User>(_dbContext);
+        public IRepository<Appointment> AppointmentRepository => new Repository<Appointment>(_dbContext);
+
+        public UnitOfWork(AppDbContext databaseContext)
         {
             _dbContext = databaseContext;
         }

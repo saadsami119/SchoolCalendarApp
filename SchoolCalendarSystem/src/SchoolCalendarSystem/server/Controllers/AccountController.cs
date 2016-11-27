@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using Microsoft.AspNetCore.Mvc;
 using SchoolCalendarSystem.server.Core.Interfaces.Services;
 using SchoolCalendarSystem.server.Core.Model;
 
@@ -9,9 +10,9 @@ namespace SchoolCalendarSystem.server.Controllers
     {
         private readonly IAccountServie _accountServie;
 
-        public AccountController()//IAccountServie accountServie)
+        public AccountController(IAccountServie accountServie)
         {
-            //_accountServie = accountServie;
+            _accountServie = accountServie;
         }
 
         public IActionResult RegisterUser(User user)
@@ -22,10 +23,20 @@ namespace SchoolCalendarSystem.server.Controllers
 
         [HttpGet]
         [Route("login")]
-        public ActionResult VerifyUser()
+        public ActionResult VerifyUser(User user)
         {
-            return Json(new JsonResponse { Data = true, Error = "some rorodfdfdfdf ", Successful = false });
-            //return Json(new JsonResponse { Data = true, Error = string.Empty, Successful = true });
+            try
+            {
+                var jsonResponse = _accountServie.IsAuthenticUser(user)
+                    ? new JsonResponse { Data = true, Error = string.Empty, Successful = true }
+                    : new JsonResponse { Data = false, Error = string.Empty, Successful = true };
+
+                return Json(jsonResponse);
+            }
+            catch (Exception ex)
+            {
+                return Json(new JsonResponse { Data = true, Error = ex.ToString(), Successful = false });
+            }
         }
 
     }

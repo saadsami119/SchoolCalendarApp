@@ -1,4 +1,10 @@
-﻿<div>
+﻿
+<div>
+    <toast [type]='toast.type' [message]='toast.message' [caption]='toast.caption' [show]='toast.show'></toast>
+</div>
+
+
+<div>
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">New Appointment</div>
@@ -23,18 +29,18 @@
                             <label>at </label>
                             <datetime formControlName="time" [datepicker]="false"></datetime>
                         </div>
+
                     </div>
                     <div class="form-group" [ngClass]="{'has-error': !appointmentForm.controls.description.valid}">
                         <label>Description</label>
                         <textarea rows="4" formControlName="description" class="form-control"></textarea>
                     </div>
-
                     <div class="form-group">
-                        <button type="submit" class="btn btn-primary col-md-offset-10" [disabled]="!appointmentForm.valid">Create</button>
+                        <button type="submit" class="btn btn-primary col-md-offset-10" (click)="createAppointment(appointmentForm.value, appointmentForm.valid)" [disabled]="!appointmentForm.valid">Create</button>
                     </div>
                 </form>
             </div>
-        </div> 
+        </div>
     </div>
-    
+
 </div>

@@ -7,41 +7,38 @@ using SchoolCalendarSystem.server.Core.Interfaces;
 
 namespace SchoolCalendarSystem.server.Core
 {
-    public class Repository : IRepository<IEntity>
+    public class Repository <TEntity> : IRepository<TEntity> where TEntity : class ,IEntity
     {
-        private readonly IUnitOfWork _uow;
-        private readonly DbSet<IEntity> _dbSet;
-        public Repository(IDatabaseContext dbContext, IUnitOfWork uow)
+        private readonly DbSet<TEntity> _dbSet;
+        public Repository(IDatabaseContext dbContext)
         {
-            _uow = uow;
-            _dbSet = dbContext.Set<IEntity>();
+            _dbSet = dbContext.Set<TEntity>();
         }
 
-        public void Add(IEntity entity)
+        public void Add(TEntity entity)
         {
             _dbSet.Add(entity);
-            _uow.SaveChanges();
         }
 
-        public void Update(IEntity entity)
+        public void Update(TEntity entity)
         {
             _dbSet.Update(entity);
-            _uow.SaveChanges();
         }
 
-        public void Delete(IEntity entity)
+        public void Delete(TEntity entity)
         {
             throw new NotImplementedException();
         }
 
-        public IEnumerable<IEntity> Get(Expression<Func<IEntity, bool>> filter = null)
+        public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null)
         {
             throw new NotImplementedException();
         }
 
-        public IEntity SingleOrDefault(Expression<Func<IEntity, bool>> filter)
+        public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> filter = null)
         {
             return _dbSet.SingleOrDefault(filter);
         }
+
     }
 }

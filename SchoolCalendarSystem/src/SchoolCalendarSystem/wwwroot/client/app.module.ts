@@ -8,6 +8,7 @@ import { HttpModule } from '@angular/http';
 import { HttpService } from './services/http.service';
 import { RouterService } from './services/router.service';
 import { AuthService } from "./services/auth.service";
+import { AppointmentService } from "./services/appointment.service";
 
 import { AppComponent } from './components/app/app.component';
 import { AppointmentComponent } from "./components/appointment/appointment.component";
@@ -32,7 +33,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
         NKDatetimeModule],
     declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent, LoginComponent, ToastComponent, UnlessDirective],
-    providers: [HttpService, RouterService, AuthService],
+    providers: [HttpService, RouterService, AuthService, AppointmentService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

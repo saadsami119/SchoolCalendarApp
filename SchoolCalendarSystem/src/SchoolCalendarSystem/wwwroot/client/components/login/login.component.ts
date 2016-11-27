@@ -13,8 +13,8 @@ import { UiToast } from "../../interfaces/toast.interface";
 })
 
 export class LoginComponent implements OnInit, UiToast {
-    public loginForm: FormGroup;
-    public toast: Toast;
+    loginForm: FormGroup;
+    toast: Toast;
 
     constructor(private formBuilder: FormBuilder,
         private authService: AuthService,
@@ -23,8 +23,8 @@ export class LoginComponent implements OnInit, UiToast {
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['asa@rer.com', Validators.required],
-            password: ['asa', Validators.required]
+            username: ['saad@gmail.com', Validators.required],
+            password: ['saad', Validators.required]
         });
         this.toast = new Toast();
     }
@@ -32,9 +32,9 @@ export class LoginComponent implements OnInit, UiToast {
     loginUser(user: User, isValid: boolean): void {
         this.authService.authenticateUser(user)
             .subscribe(isUserAuthenticated => {
-                if (!isUserAuthenticated) { this.routerService.navigateToRoute("Login"); }
+                if (!isUserAuthenticated) { this.routerService.navigateToRoute("login"); }
             },
-            error => { this.toast.errorToast(error, "caption"); });
+            error => { this.toast.errorToast(error, "Error!"); });
     }
 
 }

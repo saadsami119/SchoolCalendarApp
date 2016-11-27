@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace SchoolCalendarSystem.server.Core.Interfaces
 {
-    public interface IRepository<TEntity> where TEntity : IEntity
+    public interface IRepository<TEntity>
     {
         void Add(TEntity entity);
 
@@ -14,6 +14,6 @@ namespace SchoolCalendarSystem.server.Core.Interfaces
 
         IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null);
         
-        IEntity SingleOrDefault(Expression<Func<TEntity, bool>> filter = null);
+        TEntity SingleOrDefault(Expression<Func<TEntity, bool>> filter = null);
     }
 }

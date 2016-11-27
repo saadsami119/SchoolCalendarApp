@@ -10,28 +10,45 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
+var toast_model_1 = require("../../models/toast.model");
+var appointment_service_1 = require("../../services/appointment.service");
 var AppointmentComponent = (function () {
-    function AppointmentComponent(_fb) {
-        this._fb = _fb;
-        this.appointmentForm = _fb.group({
-            startDateTime: _fb.group({
+    function AppointmentComponent(formBuilder, appointmentService) {
+        this.formBuilder = formBuilder;
+        this.appointmentService = appointmentService;
+    }
+    AppointmentComponent.prototype.ngOnInit = function () {
+        this.appointmentForm = this.formBuilder.group({
+            startDateTime: this.formBuilder.group({
                 date: ["", forms_1.Validators.required],
                 time: ["", forms_1.Validators.required]
             }),
-            endDateTime: _fb.group({
+            endDateTime: this.formBuilder.group({
                 date: ["", forms_1.Validators.required],
                 time: ["", forms_1.Validators.required]
             }),
             description: [null, forms_1.Validators.required]
         });
-    }
+        this.toast = new toast_model_1.Toast();
+    };
+    AppointmentComponent.prototype.createAppointment = function (appoinment, isValid) {
+        var start = appoinment.startDateTime.date;
+        start.setTime(appoinment.startDateTime.time.getTime());
+        var end = appoinment.endDateTime.date;
+        end.setTime(appoinment.endDateTime.time.getTime());
+        console.log(start, end);
+        //this.appointmentService.createNewAppointment(appoinment)
+        //    .subscribe(isAppointmentCreated => {
+        //        this.toast.errorToast("Appointment is created!", "caption");
+        //    }, error => { this.toast.errorToast(error, "Error!"); });
+    };
     AppointmentComponent = __decorate([
         core_1.Component({
             moduleId: module.id,
             selector: "appoitnment",
             templateUrl: "appointment.component.html"
         }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder])
+        __metadata('design:paramtypes', [forms_1.FormBuilder, appointment_service_1.AppointmentService])
     ], AppointmentComponent);
     return AppointmentComponent;
 }());

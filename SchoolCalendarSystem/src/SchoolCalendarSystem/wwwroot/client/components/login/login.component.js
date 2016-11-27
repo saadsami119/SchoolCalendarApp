@@ -21,8 +21,8 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.ngOnInit = function () {
         this.loginForm = this.formBuilder.group({
-            username: ['asa@rer.com', forms_1.Validators.required],
-            password: ['asa', forms_1.Validators.required]
+            username: ['saad@gmail.com', forms_1.Validators.required],
+            password: ['saad', forms_1.Validators.required]
         });
         this.toast = new toast_model_1.Toast();
     };
@@ -31,9 +31,9 @@ var LoginComponent = (function () {
         this.authService.authenticateUser(user)
             .subscribe(function (isUserAuthenticated) {
             if (!isUserAuthenticated) {
-                _this.routerService.navigateToRoute("Login");
+                _this.routerService.navigateToRoute("login");
             }
-        }, function (error) { _this.toast.errorToast(error, "caption"); });
+        }, function (error) { _this.toast.errorToast(error, "Error!"); });
     };
     LoginComponent = __decorate([
         core_1.Component({
