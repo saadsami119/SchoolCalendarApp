@@ -98,4 +98,10 @@ var CalendarMonth = (function () {
     return CalendarMonth;
 }());
 exports.CalendarMonth = CalendarMonth;
-//# sourceMappingURL=calendar.component.js.map
+var CalendarDay = (function () {
+    function CalendarDay() {
+        this.appointments = new Array();
+    }
+    return CalendarDay;
+}());
+exports.CalendarDay = CalendarDay;

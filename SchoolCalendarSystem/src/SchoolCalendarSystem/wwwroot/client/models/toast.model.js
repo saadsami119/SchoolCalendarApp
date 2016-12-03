@@ -11,10 +11,15 @@ var Toast = (function () {
     Toast.prototype.infoToast = function (msg, cpt) {
         this.caption = cpt;
         this.message = msg;
+        this.type = "info";
+        this.show = true;
+    };
+    Toast.prototype.successToast = function (msg, cpt) {
+        this.caption = cpt;
+        this.message = msg;
         this.type = "success";
         this.show = true;
     };
     return Toast;
 }());
 exports.Toast = Toast;
-//# sourceMappingURL=toast.model.js.map

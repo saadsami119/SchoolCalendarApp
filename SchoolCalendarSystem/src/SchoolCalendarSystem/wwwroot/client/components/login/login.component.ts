@@ -5,6 +5,7 @@ import { AuthService } from "../../services/auth.service";
 import { RouterService } from "../../services/router.service";
 import { Toast } from "../../models/toast.model";
 import { UiToast } from "../../interfaces/toast.interface";
+import { Cookie } from 'ng2-cookies/ng2-cookies';
 
 @Component({
     moduleId: module.id,
@@ -32,7 +33,12 @@ export class LoginComponent implements OnInit, UiToast {
     loginUser(user: User, isValid: boolean): void {
         this.authService.authenticateUser(user)
             .subscribe(isUserAuthenticated => {
-                if (!isUserAuthenticated) { this.routerService.navigateToRoute("login"); }
+                if (!isUserAuthenticated) {
+                    this.toast.errorToast("Invalid username or pasword. Please try again.", "Login Failure !");
+                    return;
+                }
+                Cookie.set('USER_ID', user.username);
+                this.routerService.navigateToRoute("appointment");
             },
             error => { this.toast.errorToast(error, "Error!"); });
     }

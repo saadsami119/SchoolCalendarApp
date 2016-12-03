@@ -2,32 +2,35 @@
 <div>
     <toast [type]='toast.type' [message]='toast.message' [caption]='toast.caption' [show]='toast.show'></toast>
 </div>
-
-
+<!--<form [formGroup]="appointmentForm">
+    <input formControlName="start" type="date" class="form-control">
+    <input formControlName="start" type="time" class="form-control">
+    <button type="submit" class="btn btn-primary col-md-offset-10" (click)="createAppointment(appointmentForm.value, appointmentForm.valid)">Create</button>
+</form>-->
 <div>
     <div class="col-md-12">
         <div class="panel panel-default">
             <div class="panel-heading">New Appointment</div>
             <div class="panel-body">
                 <form [formGroup]="appointmentForm">
-                    <div formGroupName="startDateTime" class="row form-group" [ngClass]="{'has-error': !appointmentForm.controls.startDateTime.controls.date.valid || !appointmentForm.controls.startDateTime.controls.time.valid}">
+                    <div class="row form-group" [ngClass]="{'has-error': !appointmentForm.controls.startDate.valid || !appointmentForm.controls.startTime.valid}">
                         <div class="col-md-3">
                             <label>Start on </label>
-                            <datetime formControlName="date" [timepicker]="false"></datetime>
+                            <datetime formControlName="startDate" [timepicker]="false"></datetime>
                         </div>
                         <div class="col-md-3">
                             <label>at </label>
-                            <datetime formControlName="time" [datepicker]="false"></datetime>
+                            <datetime formControlName="startTime" [datepicker]="false"></datetime>
                         </div>
                     </div>
-                    <div formGroupName="endDateTime" class="row form-group" [ngClass]="{'has-error': !appointmentForm.controls.endDateTime.controls.date.valid || !appointmentForm.controls.endDateTime.controls.time.valid}">
+                    <div class="row form-group" [ngClass]="{'has-error': !appointmentForm.controls.endDate.valid || !appointmentForm.controls.endTime.valid}">
                         <div class="col-md-3">
                             <label>End on </label>
-                            <datetime formControlName="date" [timepicker]="false"></datetime>
+                            <datetime formControlName="endDate" [timepicker]="false"></datetime>
                         </div>
                         <div class="col-md-3">
                             <label>at </label>
-                            <datetime formControlName="time" [datepicker]="false"></datetime>
+                            <datetime formControlName="endTime" [datepicker]="false"></datetime>
                         </div>
 
                     </div>

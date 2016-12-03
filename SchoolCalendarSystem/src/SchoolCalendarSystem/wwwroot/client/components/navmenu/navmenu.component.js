@@ -27,4 +27,3 @@ var NavMenuComponent = (function () {
     return NavMenuComponent;
 }());
 exports.NavMenuComponent = NavMenuComponent;
-//# sourceMappingURL=navmenu.component.js.map

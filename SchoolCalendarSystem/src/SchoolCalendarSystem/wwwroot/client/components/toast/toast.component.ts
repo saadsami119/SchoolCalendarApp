@@ -19,7 +19,26 @@ export class ToastComponent {
             return;
         }
         this.isHidden = true;
-        this.cssClass = this.type === "error" ? "alert alert-danger" : "alert alert-success";
+        switch (this.type) {
+            case "error":
+                {
+                    this.cssClass = "alert alert-danger";
+                    break;
+                }
+            case "info":
+                {
+                    this.cssClass = "alert alert-info";
+                    break;
+                }
+            case "success":
+                {
+                    this.cssClass = "alert alert-success";
+                    break;
+                }
+            default:
+
+        }
+
         let timer = Observable.timer(5000, 1000)
             .timeInterval()
             .pluck('interval')

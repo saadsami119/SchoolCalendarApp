@@ -24,4 +24,3 @@ var RouterService = (function () {
     return RouterService;
 }());
 exports.RouterService = RouterService;
-//# sourceMappingURL=router.service.js.map

@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using SchoolCalendarSystem.server.Core.Interfaces;
 using SchoolCalendarSystem.server.Core.Model;
 

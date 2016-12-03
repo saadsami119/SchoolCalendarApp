@@ -13,6 +13,7 @@ var forms_1 = require('@angular/forms');
 var auth_service_1 = require("../../services/auth.service");
 var router_service_1 = require("../../services/router.service");
 var toast_model_1 = require("../../models/toast.model");
+var ng2_cookies_1 = require('ng2-cookies/ng2-cookies');
 var LoginComponent = (function () {
     function LoginComponent(formBuilder, authService, routerService) {
         this.formBuilder = formBuilder;
@@ -31,8 +32,11 @@ var LoginComponent = (function () {
         this.authService.authenticateUser(user)
             .subscribe(function (isUserAuthenticated) {
             if (!isUserAuthenticated) {
-                _this.routerService.navigateToRoute("login");
+                _this.toast.errorToast("Invalid username or pasword. Please try again.", "Login Failure !");
+                return;
             }
+            ng2_cookies_1.Cookie.set('USER_ID', user.username);
+            _this.routerService.navigateToRoute("appointment");
         }, function (error) { _this.toast.errorToast(error, "Error!"); });
     };
     LoginComponent = __decorate([
@@ -46,4 +50,3 @@ var LoginComponent = (function () {
     return LoginComponent;
 }());
 exports.LoginComponent = LoginComponent;
-//# sourceMappingURL=login.component.js.map

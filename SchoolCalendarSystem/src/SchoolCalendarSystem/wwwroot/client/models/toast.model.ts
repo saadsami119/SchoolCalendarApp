@@ -14,8 +14,14 @@
     infoToast(msg: string, cpt: string) {
         this.caption = cpt;
         this.message = msg;
-        this.type = "success";
+        this.type = "info";
         this.show = true;
     }
 
+    successToast(msg: string, cpt: string) {
+        this.caption = cpt;
+        this.message = msg;
+        this.type = "success";
+        this.show = true;
+    }
 }

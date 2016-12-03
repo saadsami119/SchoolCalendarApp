@@ -32,7 +32,12 @@ namespace SchoolCalendarSystem.server.Core
 
         public IEnumerable<TEntity> Get(Expression<Func<TEntity, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            if (filter == null)
+            {
+                return _dbSet.ToList();
+            }
+
+            return _dbSet.Where(filter);
         }
 
         public TEntity SingleOrDefault(Expression<Func<TEntity, bool>> filter = null)

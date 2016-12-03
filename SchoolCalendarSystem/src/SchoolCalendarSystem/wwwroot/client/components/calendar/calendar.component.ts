@@ -8,6 +8,7 @@ import { AuthService } from '../../services/auth.service';
     selector: "calendar",
     templateUrl: "calendar.component.html",
     providers: [AuthService]
+
 })
 
 export class CalendarComponent implements OnInit {
@@ -31,7 +32,9 @@ export class CalendarComponent implements OnInit {
 
     setCalendarForMonth(month: number): void {
         let monthStartingDate = new Date(this.selectedJahr, this.selectedMonthIndex, 1).getDate();
+
         let monthEndindDate = new Date(this.selectedJahr, 1 + this.selectedMonthIndex, 0).getDate();
+
         let calendarweek: CalendarWeek = new CalendarWeek();
         this.calendarMonth = new CalendarMonth();
 
@@ -100,4 +103,9 @@ export class CalendarWeek {
 
 export class CalendarMonth {
     weeks: Array<CalendarWeek> = new Array<CalendarWeek>();
+}
+
+export class CalendarDay {
+    name: string;
+    appointments: Array<Appointment> = new Array<Appointment>();
 }

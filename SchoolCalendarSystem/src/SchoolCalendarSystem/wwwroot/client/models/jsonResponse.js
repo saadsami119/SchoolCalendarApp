@@ -11,4 +11,3 @@ var JsonReponse = (function () {
     return JsonReponse;
 }());
 exports.JsonReponse = JsonReponse;
-//# sourceMappingURL=jsonResponse.js.map

@@ -19,7 +19,8 @@ namespace SchoolCalendarSystem.server.Core.Services
 
         public bool IsAuthenticUser(User user)
         {
-            return this._useRepository.SingleOrDefault(u => u.Password == user.Username && u.Password == user.Password) != null;
+            var foundUser = this._useRepository.SingleOrDefault(u => u.Username == user.Username && u.Password == user.Password);
+            return foundUser != null;
         }
 
         public void RegisterUser(User user)
