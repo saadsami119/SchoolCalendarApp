@@ -8,22 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
+var core_1 = require("@angular/core");
 var auth_service_1 = require("../../services/auth.service");
 var NavMenuComponent = (function () {
     function NavMenuComponent(authService) {
         this.authService = authService;
-        if (!authService.isUserNotAuthenticated()) { }
     }
-    NavMenuComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'nav-menu',
-            templateUrl: "navmenu.component.html",
-            providers: [auth_service_1.AuthService]
-        }), 
-        __metadata('design:paramtypes', [auth_service_1.AuthService])
-    ], NavMenuComponent);
     return NavMenuComponent;
 }());
-exports.NavMenuComponent = NavMenuComponent;
+NavMenuComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'nav-menu',
+        templateUrl: "navmenu.component.html",
+        providers: [auth_service_1.default]
+    }),
+    __metadata("design:paramtypes", [auth_service_1.default])
+], NavMenuComponent);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = NavMenuComponent;
+//# sourceMappingURL=navmenu.component.js.map

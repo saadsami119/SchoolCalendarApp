@@ -1,4 +1,4 @@
-﻿export class Toast {
+﻿export default class Toast {
     caption: string;
     message: string;
     type: string;

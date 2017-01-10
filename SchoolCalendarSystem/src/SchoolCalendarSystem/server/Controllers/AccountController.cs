@@ -27,9 +27,11 @@ namespace SchoolCalendarSystem.server.Controllers
         {
             try
             {
-                var jsonResponse = _accountServie.IsAuthenticUser(user)
-                    ? new JsonResponse { Data = true, Error = string.Empty, Successful = true }
-                    : new JsonResponse { Data = false, Error = string.Empty, Successful = true };
+                var foundUser = _accountServie.GetUser(user);
+
+                var jsonResponse =  foundUser != null 
+                    ? new JsonResponse { Data = foundUser.Id, Error = string.Empty, Successful = true }
+                    : new JsonResponse { Data = null , Error = string.Empty, Successful = true };
 
                 return Json(jsonResponse);
             }

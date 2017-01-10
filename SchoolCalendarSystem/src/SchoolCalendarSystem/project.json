@@ -36,6 +36,7 @@
 
   "buildOptions": {
     "emitEntryPoint": true,
+    "debugType": "portable",
     "preserveCompilationContext": true
   },
 

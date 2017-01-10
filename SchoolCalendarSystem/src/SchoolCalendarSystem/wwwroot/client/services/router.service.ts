@@ -4,7 +4,7 @@ import { Observable } from "rxjs/Observable";
 
 
 @Injectable()
-export class RouterService {
+export default class RouterService {
     constructor(private router: Router) {
     }
 

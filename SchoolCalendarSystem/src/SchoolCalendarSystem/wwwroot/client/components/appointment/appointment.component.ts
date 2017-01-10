@@ -1,11 +1,11 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { Toast } from "../../models/toast.model";
-import { UiToast } from "../../interfaces/toast.interface";
-import { Appointment } from "../../models/appointment.model";
-import { AppointmentService } from "../../services/appointment.service";
-import { AuthService } from '../../services/auth.service';
-import { RouterService } from "../../services/router.service";
+import {UiToast}  from "../../interfaces/toast.interface";
+import  Toast  from "../../models/toast.model";
+import  Appointment  from "../../models/appointment.model";
+import  AppointmentService  from "../../services/appointment.service";
+import  AuthService  from '../../services/auth.service';
+import  RouterService  from "../../services/router.service";
 
 @Component({
     moduleId: module.id,
@@ -22,7 +22,7 @@ export class AppointmentComponent implements OnInit, UiToast {
         private authService: AuthService,
         private routerService: RouterService) {
 
-          if (this.authService.isUserNotAuthenticated()) {
+          if (!this.authService.isUserAuthenticated()) {
             this.routerService.navigateToRoute("login");
             return;
         }
@@ -55,7 +55,12 @@ export class AppointmentComponent implements OnInit, UiToast {
             }, error => {
                 alert(error); this.toast.errorToast(error, "Error!");
             });
-    }
+   
+
+
+ }
+
+    
 }
 
 export class AppointmentViewModel {

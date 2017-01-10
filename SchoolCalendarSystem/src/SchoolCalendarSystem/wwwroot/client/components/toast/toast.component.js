@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var Rx_1 = require('rxjs/Rx');
+var core_1 = require("@angular/core");
+var Rx_1 = require("rxjs/Rx");
 var ToastComponent = (function () {
     function ToastComponent() {
         this.isHidden = false;
@@ -50,31 +50,33 @@ var ToastComponent = (function () {
         enumerable: true,
         configurable: true
     });
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], ToastComponent.prototype, "type", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], ToastComponent.prototype, "message", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', String)
-    ], ToastComponent.prototype, "caption", void 0);
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean), 
-        __metadata('design:paramtypes', [Boolean])
-    ], ToastComponent.prototype, "show", null);
-    ToastComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: 'toast',
-            templateUrl: 'toast.component.html'
-        }), 
-        __metadata('design:paramtypes', [])
-    ], ToastComponent);
     return ToastComponent;
 }());
-exports.ToastComponent = ToastComponent;
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], ToastComponent.prototype, "type", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], ToastComponent.prototype, "message", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", String)
+], ToastComponent.prototype, "caption", void 0);
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean),
+    __metadata("design:paramtypes", [Boolean])
+], ToastComponent.prototype, "show", null);
+ToastComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: 'toast',
+        templateUrl: 'toast.component.html'
+    }),
+    __metadata("design:paramtypes", [])
+], ToastComponent);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = ToastComponent;
+//# sourceMappingURL=toast.component.js.map

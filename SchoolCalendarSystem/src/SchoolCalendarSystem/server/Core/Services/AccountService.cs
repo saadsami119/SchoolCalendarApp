@@ -17,10 +17,10 @@ namespace SchoolCalendarSystem.server.Core.Services
             _useRepository = uow.UserRepository;
         }
 
-        public bool IsAuthenticUser(User user)
+        public User GetUser(User user)
         {
             var foundUser = this._useRepository.SingleOrDefault(u => u.Username == user.Username && u.Password == user.Password);
-            return foundUser != null;
+            return foundUser;
         }
 
         public void RegisterUser(User user)

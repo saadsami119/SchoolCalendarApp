@@ -61,11 +61,12 @@ namespace SchoolCalendarSystem
             app.UseStaticFiles();
             app.UseMvc();
 
-            //if (env.IsDevelopment())
-            //{
-            //    SetupDatabse(app);
-            //    SeedData(app);
-            //}
+            if (env.IsDevelopment())
+            {
+    
+                // SetupDatabse(app);
+                // SeedData(app);
+            }
         }
 
         private DefaultFilesOptions GetDefaultFileOptions()
@@ -79,8 +80,8 @@ namespace SchoolCalendarSystem
         private void SetupDatabse(IApplicationBuilder app)
         {
             var dbContext = app.ApplicationServices.GetRequiredService<AppDbContext>();
-            //dbContext.Database.EnsureDeleted();
-            //dbContext.Database.EnsureCreated();
+           // dbContext.Database.EnsureDeleted();
+           // dbContext.Database.EnsureCreated();
         }
 
         private void SeedData(IApplicationBuilder app)

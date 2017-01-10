@@ -8,12 +8,12 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var forms_1 = require('@angular/forms');
+var core_1 = require("@angular/core");
+var forms_1 = require("@angular/forms");
 var toast_model_1 = require("../../models/toast.model");
 var appointment_model_1 = require("../../models/appointment.model");
 var appointment_service_1 = require("../../services/appointment.service");
-var auth_service_1 = require('../../services/auth.service');
+var auth_service_1 = require("../../services/auth.service");
 var router_service_1 = require("../../services/router.service");
 var AppointmentComponent = (function () {
     function AppointmentComponent(formBuilder, appointmentService, authService, routerService) {
@@ -21,7 +21,7 @@ var AppointmentComponent = (function () {
         this.appointmentService = appointmentService;
         this.authService = authService;
         this.routerService = routerService;
-        if (this.authService.isUserNotAuthenticated()) {
+        if (!this.authService.isUserAuthenticated()) {
             this.routerService.navigateToRoute("login");
             return;
         }
@@ -34,7 +34,7 @@ var AppointmentComponent = (function () {
             endTime: [null, forms_1.Validators.required],
             description: [null, forms_1.Validators.required]
         });
-        this.toast = new toast_model_1.Toast();
+        this.toast = new toast_model_1.default();
     };
     AppointmentComponent.prototype.createAppointment = function (appoinmentVm, isValid) {
         var _this = this;
@@ -42,7 +42,7 @@ var AppointmentComponent = (function () {
         appoinmentVm.startDate.setTime(time);
         time = appoinmentVm.endTime.getTime();
         appoinmentVm.endDate.setTime(time);
-        var appointment = new appointment_model_1.Appointment(appoinmentVm.startDate, appoinmentVm.endDate, appoinmentVm.description);
+        var appointment = new appointment_model_1.default(appoinmentVm.startDate, appoinmentVm.endDate, appoinmentVm.description);
         this.appointmentService.createNewAppointment(appointment)
             .subscribe(function (__) {
             _this.toast.successToast("Appointment is created!", "Info!");
@@ -51,16 +51,19 @@ var AppointmentComponent = (function () {
             _this.toast.errorToast(error, "Error!");
         });
     };
-    AppointmentComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: "appoitnment",
-            templateUrl: "appointment.component.html"
-        }), 
-        __metadata('design:paramtypes', [forms_1.FormBuilder, appointment_service_1.AppointmentService, auth_service_1.AuthService, router_service_1.RouterService])
-    ], AppointmentComponent);
     return AppointmentComponent;
 }());
+AppointmentComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: "appoitnment",
+        templateUrl: "appointment.component.html"
+    }),
+    __metadata("design:paramtypes", [forms_1.FormBuilder,
+        appointment_service_1.default,
+        auth_service_1.default,
+        router_service_1.default])
+], AppointmentComponent);
 exports.AppointmentComponent = AppointmentComponent;
 var AppointmentViewModel = (function () {
     function AppointmentViewModel() {
@@ -68,3 +71,4 @@ var AppointmentViewModel = (function () {
     return AppointmentViewModel;
 }());
 exports.AppointmentViewModel = AppointmentViewModel;
+//# sourceMappingURL=appointment.component.js.map

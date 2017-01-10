@@ -9,7 +9,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var ng2_cookies_1 = require('ng2-cookies/ng2-cookies');
 var http_service_1 = require("./http.service");
 var http_1 = require("@angular/http");
 var AuthService = (function () {
@@ -20,15 +19,21 @@ var AuthService = (function () {
         var params = new http_1.URLSearchParams();
         params.set("username", user.username);
         params.set("password", user.password);
-        return this.httpService.get("/api/account/login", params);
+        return this.httpService.get1("/api/account/login", params);
     };
-    AuthService.prototype.isUserNotAuthenticated = function () {
-        return ng2_cookies_1.Cookie.get('USER_ID') === null;
+    AuthService.prototype.isUserAuthenticated = function () {
+        return this.logedInUserId != null;
     };
-    AuthService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_service_1.HttpService])
-    ], AuthService);
+    AuthService.prototype.setLogedInUserInfo = function (userId, username) {
+        this.logedInUserName = username;
+        this.logedInUserId = userId;
+    };
     return AuthService;
 }());
-exports.AuthService = AuthService;
+AuthService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_service_1.default])
+], AuthService);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = AuthService;
+//# sourceMappingURL=auth.service.js.map

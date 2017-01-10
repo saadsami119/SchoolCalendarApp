@@ -9,7 +9,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
-var router_1 = require('@angular/router');
+var router_1 = require("@angular/router");
 var RouterService = (function () {
     function RouterService(router) {
         this.router = router;
@@ -17,10 +17,12 @@ var RouterService = (function () {
     RouterService.prototype.navigateToRoute = function (route) {
         this.router.navigate([route]);
     };
-    RouterService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [router_1.Router])
-    ], RouterService);
     return RouterService;
 }());
-exports.RouterService = RouterService;
+RouterService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [router_1.Router])
+], RouterService);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = RouterService;
+//# sourceMappingURL=router.service.js.map

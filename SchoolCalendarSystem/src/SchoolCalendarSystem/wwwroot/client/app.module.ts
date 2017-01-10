@@ -5,17 +5,17 @@ import { RouterModule, Routes } from '@angular/router';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { HttpModule } from '@angular/http';
 
-import { HttpService } from './services/http.service';
-import { RouterService } from './services/router.service';
-import { AuthService } from "./services/auth.service";
-import { AppointmentService } from "./services/appointment.service";
-
+import  HttpService  from './services/http.service';
+import  RouterService  from './services/router.service';
+import  AuthService  from "./services/auth.service";
+import  AppointmentService  from "./services/appointment.service";
+import CalendarService from "./services/calendar.service";
 import { AppComponent } from './components/app/app.component';
 import { AppointmentComponent } from "./components/appointment/appointment.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
-import { NavMenuComponent } from "./components/navmenu/navmenu.component";
-import {LoginComponent} from './components/login/login.component';
-import { ToastComponent} from "./components/toast/toast.component";
+import NavMenuComponent  from "./components/navmenu/navmenu.component";
+import LoginComponent from './components/login/login.component';
+import  ToastComponent from "./components/toast/toast.component";
 import { UnlessDirective} from "./directives/alert.directive";
 
 const appRoutes: Routes = [
@@ -33,7 +33,7 @@ const appRoutes: Routes = [
         RouterModule.forRoot(appRoutes),
         NKDatetimeModule],
     declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent, LoginComponent, ToastComponent, UnlessDirective],
-    providers: [HttpService, RouterService, AuthService, AppointmentService],
+    providers: [HttpService, RouterService, AuthService, AppointmentService,CalendarService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

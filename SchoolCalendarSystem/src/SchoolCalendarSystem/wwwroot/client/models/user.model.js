@@ -4,4 +4,6 @@ var User = (function () {
     }
     return User;
 }());
-exports.User = User;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = User;
+//# sourceMappingURL=user.model.js.map

@@ -1,111 +1,86 @@
-﻿import { Component, OnInit } from '@angular/core';
-import { Appointment } from "../../models/appointment.model";
-import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import { AuthService } from '../../services/auth.service';
+﻿import CalendarMonth from "../../models/calendarMonth.model";
+import { Component, OnInit } from '@angular/core';
+import  Appointment  from "../../models/appointment.model";
+import  AuthService  from '../../services/auth.service';
+import AppointmentService from "../../services/appointment.service";
+import CalendarService from "../../services/calendar.service";
+import RouterService from "../../services/router.service";
 
 @Component({
     moduleId: module.id,
     selector: "calendar",
     templateUrl: "calendar.component.html",
-    providers: [AuthService]
+    providers: [AuthService,AppointmentService,CalendarService]
 
 })
 
 export class CalendarComponent implements OnInit {
 
-    public calendarMonth: CalendarMonth;
-    public selectedMonthIndex: number;
-    public selectedMonthName: string;
-    public selectedJahr: number;
+    public calendarMonth: CalendarMonth;    
+    public currentMonthName: string;
+    public currentYear: number;
+    private _currentMonth: number;
 
-    constructor(private authService: AuthService) {
-        if (authService.isUserNotAuthenticated()) {
-        }
+    constructor(private authService: AuthService,               
+                private appointmentService : AppointmentService, 
+                private calendarService : CalendarService) {   
     }
 
-    ngOnInit() {
-        this.selectedMonthName = new Date().toLocaleString("en-us", { month: "long" });
-        this.selectedMonthIndex = new Date().getMonth();
-        this.selectedJahr = new Date().getFullYear();
-        this.setCalendarForMonth(this.selectedMonthIndex);
-    }
-
-    setCalendarForMonth(month: number): void {
-        let monthStartingDate = new Date(this.selectedJahr, this.selectedMonthIndex, 1).getDate();
-
-        let monthEndindDate = new Date(this.selectedJahr, 1 + this.selectedMonthIndex, 0).getDate();
-
-        let calendarweek: CalendarWeek = new CalendarWeek();
+    ngOnInit() {        
+        //   if (!this.authService.isUserAuthenticated()) {
+        //     //this.routerService.navigateToRoute("login");
+        //     return;
+        // }
         this.calendarMonth = new CalendarMonth();
-
-        for (let i: number = monthStartingDate; i <= monthEndindDate; i++) {
-            let date = new Date(this.selectedJahr, this.selectedMonthIndex, i);
-            let dayName = date.toLocaleString('en-us', { weekday: 'long' });
-
-            switch (dayName) {
-                case "Monday":
-                    calendarweek.monday = date.getDate().toString();
-                    break;
-                case "Tuesday":
-                    calendarweek.tuesday = date.getDate().toString();
-                    break;
-                case "Wednesday":
-                    calendarweek.wednesday = date.getDate().toString();
-                    break;
-                case "Thursday":
-                    calendarweek.thursday = date.getDate().toString();
-                    break;
-                case "Friday":
-                    calendarweek.friday = date.getDate().toString();
-                    break;
-                case "Saturday":
-                    calendarweek.saturday = date.getDate().toString();
-                    break;
-                case "Sunday":
-                    calendarweek.sunday = date.getDate().toString();
-                    break;
-                default:
-            }
-
-            if (dayName === "Sunday") {
-                this.calendarMonth.weeks.push(calendarweek);
-                calendarweek = new CalendarWeek();
-            }
-        }
-        this.calendarMonth.weeks.push(calendarweek);
+        this._currentMonth = this.getCurrentMonth();
+        this.currentMonthName = this.getCurrentMonthName();        
+        this.currentYear = this.getCurrentYear();
+        
+        this.initilizeMonthlyCalendar();
     }
 
-    setNextMonthName(): void {
-        this.selectedJahr = this.selectedJahr + Math.floor((this.selectedMonthIndex + 1) / 12);
-        this.selectedMonthIndex = (this.selectedMonthIndex + 1) === 12 ? (this.selectedMonthIndex + 1) % 12 : (this.selectedMonthIndex + 1);
-        this.selectedMonthName = new Date(this.selectedJahr, this.selectedMonthIndex, 1).toLocaleString("en-us", { month: "long" });
-        this.setCalendarForMonth(this.selectedMonthIndex);
+    initilizeMonthlyCalendar(): void {      
+         this.appointmentService.getAppointmentsForMonth(12,2016)        
+         
+          .subscribe(monthlyAppointments =>
+          {      
+            this.calendarMonth =   this.calendarService.initilizeCalendarForMonth(this._currentMonth,this.currentYear,monthlyAppointments);          
+          });      
+        
     }
 
-    setPreviousMonthName(): void {
-        this.selectedJahr = this.selectedJahr + Math.floor((this.selectedMonthIndex - 1) / 12);
-        this.selectedMonthIndex = (this.selectedMonthIndex - 1) === 12 ? (this.selectedMonthIndex - 1) % 12 : (this.selectedMonthIndex - 1);
-        this.selectedMonthName = new Date(this.selectedJahr, this.selectedMonthIndex, 1).toLocaleString("en-us", { month: "long" });
-        this.setCalendarForMonth(this.selectedMonthIndex);
+    initCalendarForNextMonth(): void {
+        if(this._currentMonth === 11){
+           this.currentYear = this.currentYear + 1;
+           this._currentMonth = 0;
+       }else{           
+           this._currentMonth = this._currentMonth + 1;
+       }
+        this.currentMonthName = new Date(this.currentYear, this._currentMonth, 1).toLocaleString("en-us", { month: "long" });
+        this.initilizeMonthlyCalendar();
     }
 
-}
+    initCalendarForPreviousMonth(): void {
+       if(this._currentMonth === 0){
+           this.currentYear = this.currentYear - 1;
+           this._currentMonth = 11;
+       }else{           
+           this._currentMonth = this._currentMonth - 1;
+       }
+        
+        this.currentMonthName = new Date(this.currentYear, this._currentMonth, 1).toLocaleString("en-us", { month: "long" });
+        this.initilizeMonthlyCalendar();
+    }
 
-export class CalendarWeek {
-    monday: string;
-    tuesday: string;
-    wednesday: string;
-    thursday: string;
-    friday: string;
-    saturday: string;
-    sunday: string;
-}
+    private getCurrentMonth() : number{
+        return new Date().getMonth();
+    }
 
-export class CalendarMonth {
-    weeks: Array<CalendarWeek> = new Array<CalendarWeek>();
-}
+    private getCurrentYear() : number{
+        return new Date().getFullYear();
+    }
 
-export class CalendarDay {
-    name: string;
-    appointments: Array<Appointment> = new Array<Appointment>();
+    private getCurrentMonthName() : string{
+        return new Date().toLocaleString("en-us", { month: "long" }); // TODO : chnage culture..
+    }
 }

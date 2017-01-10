@@ -1,17 +1,23 @@
 ﻿import { Injectable } from "@angular/core";
 import { Http, Response, Headers, RequestOptions, URLSearchParams  } from "@angular/http";
 import { Observable } from "rxjs/Observable";
-import { JsonReponse } from "../models/jsonResponse";
+import  JsonReponse from "../models/jsonResponse";
 
 
 @Injectable()
-export class HttpService {
+export default class HttpService {
 
     constructor(private http: Http) {
     }
 
-    get(url: string, params: URLSearchParams): Observable<any> {
+    get1(url: string, params: URLSearchParams): Observable<any> {
        return this.http.get(url, { search: params })
+            .map(res => this.convertToJsonResponse(res))
+            .catch(error => this.parseErrorMsg(error));
+    }
+
+    get(url: string): Observable<any> {
+       return this.http.get(url)
             .map(res => this.convertToJsonResponse(res))
             .catch(error => this.parseErrorMsg(error));
     }

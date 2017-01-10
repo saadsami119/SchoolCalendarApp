@@ -8,100 +8,78 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var auth_service_1 = require('../../services/auth.service');
+var calendarMonth_model_1 = require("../../models/calendarMonth.model");
+var core_1 = require("@angular/core");
+var auth_service_1 = require("../../services/auth.service");
+var appointment_service_1 = require("../../services/appointment.service");
+var calendar_service_1 = require("../../services/calendar.service");
 var CalendarComponent = (function () {
-    function CalendarComponent(authService) {
+    function CalendarComponent(authService, appointmentService, calendarService) {
         this.authService = authService;
-        if (authService.isUserNotAuthenticated()) {
-        }
+        this.appointmentService = appointmentService;
+        this.calendarService = calendarService;
     }
     CalendarComponent.prototype.ngOnInit = function () {
-        this.selectedMonthName = new Date().toLocaleString("en-us", { month: "long" });
-        this.selectedMonthIndex = new Date().getMonth();
-        this.selectedJahr = new Date().getFullYear();
-        this.setCalendarForMonth(this.selectedMonthIndex);
+        //   if (!this.authService.isUserAuthenticated()) {
+        //     //this.routerService.navigateToRoute("login");
+        //     return;
+        // }
+        this.calendarMonth = new calendarMonth_model_1.default();
+        this._currentMonth = this.getCurrentMonth();
+        this.currentMonthName = this.getCurrentMonthName();
+        this.currentYear = this.getCurrentYear();
+        this.initilizeMonthlyCalendar();
     };
-    CalendarComponent.prototype.setCalendarForMonth = function (month) {
-        var monthStartingDate = new Date(this.selectedJahr, this.selectedMonthIndex, 1).getDate();
-        var monthEndindDate = new Date(this.selectedJahr, 1 + this.selectedMonthIndex, 0).getDate();
-        var calendarweek = new CalendarWeek();
-        this.calendarMonth = new CalendarMonth();
-        for (var i = monthStartingDate; i <= monthEndindDate; i++) {
-            var date = new Date(this.selectedJahr, this.selectedMonthIndex, i);
-            var dayName = date.toLocaleString('en-us', { weekday: 'long' });
-            switch (dayName) {
-                case "Monday":
-                    calendarweek.monday = date.getDate().toString();
-                    break;
-                case "Tuesday":
-                    calendarweek.tuesday = date.getDate().toString();
-                    break;
-                case "Wednesday":
-                    calendarweek.wednesday = date.getDate().toString();
-                    break;
-                case "Thursday":
-                    calendarweek.thursday = date.getDate().toString();
-                    break;
-                case "Friday":
-                    calendarweek.friday = date.getDate().toString();
-                    break;
-                case "Saturday":
-                    calendarweek.saturday = date.getDate().toString();
-                    break;
-                case "Sunday":
-                    calendarweek.sunday = date.getDate().toString();
-                    break;
-                default:
-            }
-            if (dayName === "Sunday") {
-                this.calendarMonth.weeks.push(calendarweek);
-                calendarweek = new CalendarWeek();
-            }
+    CalendarComponent.prototype.initilizeMonthlyCalendar = function () {
+        var _this = this;
+        this.appointmentService.getAppointmentsForMonth(12, 2016)
+            .subscribe(function (monthlyAppointments) {
+            _this.calendarMonth = _this.calendarService.initilizeCalendarForMonth(_this._currentMonth, _this.currentYear, monthlyAppointments);
+        });
+    };
+    CalendarComponent.prototype.initCalendarForNextMonth = function () {
+        if (this._currentMonth === 11) {
+            this.currentYear = this.currentYear + 1;
+            this._currentMonth = 0;
         }
-        this.calendarMonth.weeks.push(calendarweek);
+        else {
+            this._currentMonth = this._currentMonth + 1;
+        }
+        this.currentMonthName = new Date(this.currentYear, this._currentMonth, 1).toLocaleString("en-us", { month: "long" });
+        this.initilizeMonthlyCalendar();
     };
-    CalendarComponent.prototype.setNextMonthName = function () {
-        this.selectedJahr = this.selectedJahr + Math.floor((this.selectedMonthIndex + 1) / 12);
-        this.selectedMonthIndex = (this.selectedMonthIndex + 1) === 12 ? (this.selectedMonthIndex + 1) % 12 : (this.selectedMonthIndex + 1);
-        this.selectedMonthName = new Date(this.selectedJahr, this.selectedMonthIndex, 1).toLocaleString("en-us", { month: "long" });
-        this.setCalendarForMonth(this.selectedMonthIndex);
+    CalendarComponent.prototype.initCalendarForPreviousMonth = function () {
+        if (this._currentMonth === 0) {
+            this.currentYear = this.currentYear - 1;
+            this._currentMonth = 11;
+        }
+        else {
+            this._currentMonth = this._currentMonth - 1;
+        }
+        this.currentMonthName = new Date(this.currentYear, this._currentMonth, 1).toLocaleString("en-us", { month: "long" });
+        this.initilizeMonthlyCalendar();
     };
-    CalendarComponent.prototype.setPreviousMonthName = function () {
-        this.selectedJahr = this.selectedJahr + Math.floor((this.selectedMonthIndex - 1) / 12);
-        this.selectedMonthIndex = (this.selectedMonthIndex - 1) === 12 ? (this.selectedMonthIndex - 1) % 12 : (this.selectedMonthIndex - 1);
-        this.selectedMonthName = new Date(this.selectedJahr, this.selectedMonthIndex, 1).toLocaleString("en-us", { month: "long" });
-        this.setCalendarForMonth(this.selectedMonthIndex);
+    CalendarComponent.prototype.getCurrentMonth = function () {
+        return new Date().getMonth();
     };
-    CalendarComponent = __decorate([
-        core_1.Component({
-            moduleId: module.id,
-            selector: "calendar",
-            templateUrl: "calendar.component.html",
-            providers: [auth_service_1.AuthService]
-        }), 
-        __metadata('design:paramtypes', [auth_service_1.AuthService])
-    ], CalendarComponent);
+    CalendarComponent.prototype.getCurrentYear = function () {
+        return new Date().getFullYear();
+    };
+    CalendarComponent.prototype.getCurrentMonthName = function () {
+        return new Date().toLocaleString("en-us", { month: "long" }); // TODO : chnage culture..
+    };
     return CalendarComponent;
 }());
+CalendarComponent = __decorate([
+    core_1.Component({
+        moduleId: module.id,
+        selector: "calendar",
+        templateUrl: "calendar.component.html",
+        providers: [auth_service_1.default, appointment_service_1.default, calendar_service_1.default]
+    }),
+    __metadata("design:paramtypes", [auth_service_1.default,
+        appointment_service_1.default,
+        calendar_service_1.default])
+], CalendarComponent);
 exports.CalendarComponent = CalendarComponent;
-var CalendarWeek = (function () {
-    function CalendarWeek() {
-    }
-    return CalendarWeek;
-}());
-exports.CalendarWeek = CalendarWeek;
-var CalendarMonth = (function () {
-    function CalendarMonth() {
-        this.weeks = new Array();
-    }
-    return CalendarMonth;
-}());
-exports.CalendarMonth = CalendarMonth;
-var CalendarDay = (function () {
-    function CalendarDay() {
-        this.appointments = new Array();
-    }
-    return CalendarDay;
-}());
-exports.CalendarDay = CalendarDay;
+//# sourceMappingURL=calendar.component.js.map

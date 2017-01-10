@@ -1,4 +1,4 @@
-﻿import { Toast } from "../models/toast.model";
+﻿import Toast from "../models/toast.model";
 
 export interface UiToast {
     toast: Toast;

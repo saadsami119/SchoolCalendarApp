@@ -8,8 +8,8 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var core_2 = require('@angular/core');
+var core_1 = require("@angular/core");
+var core_2 = require("@angular/core");
 var UnlessDirective = (function () {
     function UnlessDirective(templateRef, viewContainer) {
         this.templateRef = templateRef;
@@ -27,15 +27,16 @@ var UnlessDirective = (function () {
         enumerable: true,
         configurable: true
     });
-    __decorate([
-        core_1.Input(), 
-        __metadata('design:type', Boolean), 
-        __metadata('design:paramtypes', [Boolean])
-    ], UnlessDirective.prototype, "myUnless", null);
-    UnlessDirective = __decorate([
-        core_1.Directive({ selector: '[myUnless]' }), 
-        __metadata('design:paramtypes', [core_2.TemplateRef, core_2.ViewContainerRef])
-    ], UnlessDirective);
     return UnlessDirective;
 }());
+__decorate([
+    core_1.Input(),
+    __metadata("design:type", Boolean),
+    __metadata("design:paramtypes", [Boolean])
+], UnlessDirective.prototype, "myUnless", null);
+UnlessDirective = __decorate([
+    core_1.Directive({ selector: '[myUnless]' }),
+    __metadata("design:paramtypes", [core_2.TemplateRef, core_2.ViewContainerRef])
+], UnlessDirective);
 exports.UnlessDirective = UnlessDirective;
+//# sourceMappingURL=alert.directive.js.map

@@ -1,5 +1,5 @@
 ﻿import { Component } from '@angular/core';
-import { AuthService} from "../../services/auth.service";
+import  AuthService from "../../services/auth.service";
 @Component({
     moduleId: module.id,
     selector: 'nav-menu',
@@ -7,10 +7,9 @@ import { AuthService} from "../../services/auth.service";
     providers: [AuthService]
     
 })
-export class NavMenuComponent {
+export default class NavMenuComponent {
 
-    constructor(private authService: AuthService) {
-        if (!authService.isUserNotAuthenticated()){}
+    constructor(private authService: AuthService) {       
     }
 
 }

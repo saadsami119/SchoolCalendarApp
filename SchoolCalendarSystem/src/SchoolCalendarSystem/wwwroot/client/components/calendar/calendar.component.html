@@ -4,14 +4,14 @@
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li>
-                <a aria-label="Previous" (click)="setPreviousMonthName()">
+                <a aria-label="Previous" (click)="initCalendarForPreviousMonth()">
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li><a>{{selectedMonthName}} , {{selectedJahr}}</a></li>
+            <li><a> {{currentMonthName}} , {{currentYear}} </a></li>
 
             <li>
-                <a  aria-label="Next" (click)="setNextMonthName()">
+                <a  aria-label="Next" (click)="initCalendarForNextMonth()">
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
@@ -35,40 +35,61 @@
         <tr *ngFor="let week of calendarMonth.weeks">
             <td>
                 <div class="well">
-                    {{week.monday}}
+                    {{week.monday?.day}}
+                    <div *ngIf="week.monday?.totalAppintments > 0">
+                       <a class="label label-primary">{{week.monday.totalAppintments}} entries</a>
+                    </div>
                 </div>
             </td>
 
             <td>
                 <div class="well">
-                    {{week.tuesday}}
+                    {{week.tuesday?.day}}
+                      <div *ngIf="week.tuesday?.totalAppintments > 0">
+                        <a href="#"><span class="badge">week.tuesday.totalAppintments</span></a>>
+                    </div>
                 </div>
             </td>
 
             <td>
                 <div class="well">
-                    {{week.wednesday}}
+                    {{week.wednesday?.day}}
+                      <div *ngIf="week.wednesday?.totalAppintments > 0">
+                        <a href="#"><span class="badge">week.wednesday.totalAppintments</span></a>>
+                    </div>
                 </div>
             </td>
 
             <td>
                 <div class="well">
-                    {{week.thursday}}
+                    {{week.thursday?.day}}
+                     <div *ngIf="week.thursday?.totalAppintments > 0">
+                        <a href="#"><span class="badge">week.thursday.totalAppintments</span></a>>
+                    </div>
                 </div>
             </td>
             <td>
                 <div class="well">
-                    {{week.friday}}
+                    {{week.friday?.day}}
+                     <div *ngIf="week.friday?.totalAppintments > 0">
+                        <a href="#"><span class="badge">week.friday.totalAppintments</span></a>>
+                    </div>
                 </div>
             </td>
             <td>
                 <div class="well">
-                    {{week.saturday}}
+                    {{week.saturday?.day}}
+                     <div *ngIf="week.saturday?.totalAppintments > 0">
+                        <a href="#"><span class="badge">week.saturday.totalAppintments</span></a>>
+                    </div>
                 </div>
             </td>
             <td>
                 <div class="well">
-                    {{week.sunday}}
+                    {{week.sunday?.day}}
+                     <div *ngIf="week.sunday?.totalAppintments > 0">
+                        <a href="#"><span class="badge">week.sunday.totalAppintments</span></a>>
+                    </div>
                 </div>
             </td>
         </tr>

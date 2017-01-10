@@ -1,4 +1,4 @@
-﻿export class Appointment {
+﻿export default class Appointment {
     start: Date;
     end: Date;
     description : string;

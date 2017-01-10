@@ -6,7 +6,7 @@ import { Observable } from 'rxjs/Rx';
     selector: 'toast',
     templateUrl: 'toast.component.html'
 })
-export class ToastComponent {
+export default class ToastComponent {
     isHidden: boolean = false;
     cssClass: string = "";
 

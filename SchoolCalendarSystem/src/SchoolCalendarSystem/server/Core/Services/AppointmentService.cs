@@ -1,4 +1,7 @@
-﻿using SchoolCalendarSystem.server.Core.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using SchoolCalendarSystem.server.Core.Interfaces;
 using SchoolCalendarSystem.server.Core.Interfaces.Services;
 using SchoolCalendarSystem.server.Core.Model;
 
@@ -18,6 +21,18 @@ namespace SchoolCalendarSystem.server.Core.Services
         {
             this._appointmentRepository.Add(appointment);
             this._uow.SaveChanges();
+        }
+
+        public IEnumerable<Appointment> GetMonthlyAppointments(int month , int year)
+        {
+            var totalDaysInMonth = DateTime.DaysInMonth(year, month);
+            var startDate = new DateTime(year,month,01);
+            var endDate = new DateTime(year,month,totalDaysInMonth);
+
+            return this._appointmentRepository
+                    .Get(x=>x.StartDateTime >= startDate && x.StartDateTime <= endDate)
+                    .OrderBy(a=>a.StartDateTime);           
+            
         }
     }
 }

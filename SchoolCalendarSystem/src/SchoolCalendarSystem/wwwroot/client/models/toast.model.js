@@ -22,4 +22,6 @@ var Toast = (function () {
     };
     return Toast;
 }());
-exports.Toast = Toast;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = Toast;
+//# sourceMappingURL=toast.model.js.map

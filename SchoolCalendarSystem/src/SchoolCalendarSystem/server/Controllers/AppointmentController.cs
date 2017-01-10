@@ -6,6 +6,7 @@ using SchoolCalendarSystem.server.Core.Model;
 namespace SchoolCalendarSystem.server.Controllers
 {
     [Route("api/[controller]")]
+   
     public class AppointmentController : Controller
     {
         private readonly IAppoitmentService _appointmentService;
@@ -27,6 +28,14 @@ namespace SchoolCalendarSystem.server.Controllers
             {
                 return Json(new JsonResponse { Data = null, Successful = true, Error = ex.ToString() });
             }
+        }
+
+        
+        [HttpGet("month/{month}/year/{year}")]
+        public IActionResult GetAppointments(int month, int year)
+        {
+           var appointments =  this._appointmentService.GetMonthlyAppointments(month,year);
+           return Json(new JsonResponse { Data = appointments , Successful = true, Error = string.Empty });            
         }
     }
 }

@@ -15,9 +15,15 @@ var HttpService = (function () {
     function HttpService(http) {
         this.http = http;
     }
-    HttpService.prototype.get = function (url, params) {
+    HttpService.prototype.get1 = function (url, params) {
         var _this = this;
         return this.http.get(url, { search: params })
+            .map(function (res) { return _this.convertToJsonResponse(res); })
+            .catch(function (error) { return _this.parseErrorMsg(error); });
+    };
+    HttpService.prototype.get = function (url) {
+        var _this = this;
+        return this.http.get(url)
             .map(function (res) { return _this.convertToJsonResponse(res); })
             .catch(function (error) { return _this.parseErrorMsg(error); });
     };
@@ -49,10 +55,12 @@ var HttpService = (function () {
         }
         return resJson.data;
     };
-    HttpService = __decorate([
-        core_1.Injectable(), 
-        __metadata('design:paramtypes', [http_1.Http])
-    ], HttpService);
     return HttpService;
 }());
-exports.HttpService = HttpService;
+HttpService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [http_1.Http])
+], HttpService);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = HttpService;
+//# sourceMappingURL=http.service.js.map

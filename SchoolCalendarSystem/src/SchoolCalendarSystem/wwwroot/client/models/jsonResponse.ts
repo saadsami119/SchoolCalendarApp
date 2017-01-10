@@ -1,4 +1,4 @@
-﻿export class JsonReponse {
+﻿export default class JsonReponse {
 
     public data: any;
     public error: string;

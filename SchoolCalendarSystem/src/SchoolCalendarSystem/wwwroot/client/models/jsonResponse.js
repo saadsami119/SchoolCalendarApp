@@ -10,4 +10,6 @@ var JsonReponse = (function () {
     }
     return JsonReponse;
 }());
-exports.JsonReponse = JsonReponse;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = JsonReponse;
+//# sourceMappingURL=jsonResponse.js.map

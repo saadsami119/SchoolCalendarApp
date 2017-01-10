@@ -10,4 +10,6 @@ var Appointment = (function () {
     }
     return Appointment;
 }());
-exports.Appointment = Appointment;
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = Appointment;
+//# sourceMappingURL=appointment.model.js.map
