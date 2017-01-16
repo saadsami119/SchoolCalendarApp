@@ -21,7 +21,7 @@ var AppointmentComponent = (function () {
         this.appointmentService = appointmentService;
         this.authService = authService;
         this.routerService = routerService;
-        if (!this.authService.isUserAuthenticated()) {
+        if (!this.authService.isUserLoggedIn()) {
             this.routerService.navigateToRoute("login");
             return;
         }

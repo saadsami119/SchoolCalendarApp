@@ -37,7 +37,7 @@ export default class LoginComponent implements OnInit, UiToast {
                     return;
                 }
                 this.authService.setLogedInUserInfo(authenticatedUserId, user.username)
-                this.routerService.navigateToRoute("appointment");
+                this.routerService.navigateToRoute("calendar");
             },
             error => { this.toast.errorToast(error, "Error!"); });
     }

@@ -1,4 +1,4 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component , OnInit } from '@angular/core';
 import  HttpService  from '../../services/http.service';
 import  RouterService  from '../../services/router.service';
 import  AuthService  from "../../services/auth.service";
@@ -27,4 +27,16 @@ import 'rxjs/add/operator/toPromise';
     providers: [HttpService, RouterService, AuthService, AppointmentService, CalendarService],
     })
 
-export class AppComponent { }
+export class AppComponent implements OnInit {
+
+ constructor(private authService: AuthService, private routerService: RouterService) { }
+
+ ngOnInit() {            
+
+       if(!this.authService.isUserLoggedIn()){
+            this.routerService.navigateToRoute("login")
+        }
+        
+    }
+
+}

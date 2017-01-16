@@ -21,7 +21,7 @@ var AuthService = (function () {
         params.set("password", user.password);
         return this.httpService.get1("/api/account/login", params);
     };
-    AuthService.prototype.isUserAuthenticated = function () {
+    AuthService.prototype.isUserLoggedIn = function () {
         return this.logedInUserId != null;
     };
     AuthService.prototype.setLogedInUserInfo = function (userId, username) {

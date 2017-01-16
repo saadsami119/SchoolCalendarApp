@@ -36,7 +36,8 @@
     "bootstrap-datepicker": "1.6.4",
     "bootstrap-timepicker": "0.5.2",
     "ng2-datetime": "1.2.1",
-    "ng2-cookies": "1.0.3"
+    "ng2-cookies": "1.0.3",
+    "bootstrap-material-design":"0.5.10"
   },
   "devDependencies": {
     "concurrently": "3.0.0",

@@ -11,41 +11,49 @@ gulp.task('copy-dependency:core-js', function () {
         'node_modules/core-js/client/*.js'
     ]).pipe(gulp.dest(libs + 'core-js'));
 });
+
 gulp.task('copy-dependency:zone.js', function () {
     gulp.src([
         'node_modules/zone.js/dist/*.js'
     ]).pipe(gulp.dest(libs + 'zone.js'));
 });
+
 gulp.task('copy-dependency:reflect-metadata', function () {
     gulp.src([
         'node_modules/reflect-metadata/reflect.js'
     ]).pipe(gulp.dest(libs + 'reflect-metadata'));
 });
+
 gulp.task('copy-dependency:systemjs', function () {
     gulp.src([
         'node_modules/systemjs/dist/*.js'
     ]).pipe(gulp.dest(libs + 'systemjs'));
 });
+
 gulp.task('copy-dependency:rxjs', function () {
     gulp.src([
         'node_modules/rxjs/**/*.js'
     ]).pipe(gulp.dest(libs + 'rxjs'));
 });
+
 gulp.task('copy-dependency:angular-in-memory-web-api', function () {
     gulp.src([
         'node_modules/angular-in-memory-web-api/**/*.js'
     ]).pipe(gulp.dest(libs + 'angular-in-memory-web-api'));
 });
+
 gulp.task('copy-dependency:angular', function () {
     gulp.src([
         'node_modules/@angular/**/*.js'
     ]).pipe(gulp.dest(libs + '@angular'));
 });
+
 gulp.task('copy-dependency:bootstrap', function () {
     gulp.src([
         'node_modules/bootstrap/dist/**/*.*'
     ]).pipe(gulp.dest(libs + 'bootstrap'));
 });
+
 gulp.task('copy-dependency:jquery', function () {
     gulp.src([
         'node_modules/jquery/dist/jquery.min.js'
@@ -73,11 +81,19 @@ gulp.task('copy-dependency:angular2-datetime-picker', function () {
     ]).pipe(gulp.dest(libs + 'ng2-datetime'));
 
 });
+
 gulp.task('copy-dependency:ng2-cookies', function () {
     gulp.src([
           'node_modules/ng2-cookies/**/*.js'
     ]).pipe(gulp.dest(libs + 'ng2-cookies'));
 });
+
+gulp.task('copy-dependency:bootstrap-material-design', function () {
+    gulp.src([
+          'node_modules/bootstrap-material-design/dist/**/*.*'
+    ]).pipe(gulp.dest(libs + 'bootstrap-material-design'));
+});
+
 
 gulp.task('copy-dependencies', [
     'copy-dependency:core-js',

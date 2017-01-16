@@ -35,7 +35,7 @@ var LoginComponent = (function () {
                 return;
             }
             _this.authService.setLogedInUserInfo(authenticatedUserId, user.username);
-            _this.routerService.navigateToRoute("appointment");
+            _this.routerService.navigateToRoute("calendar");
         }, function (error) { _this.toast.errorToast(error, "Error!"); });
     };
     return LoginComponent;

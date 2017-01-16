@@ -15,7 +15,7 @@ html, body {
 
 .calendar-dates-text{  
     font-weight: bold;
-    font-size:medium;    
+    font-size:large;    
 }
 
 .scroll{
@@ -29,8 +29,4 @@ html, body {
 
 .div-lg{
     height: 200px;
-}
-
-tab{
-    padding: 0 80px; /* Or desired space*/
 }

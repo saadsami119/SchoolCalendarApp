@@ -1,4 +1,5 @@
-﻿<div class="col-md-offset-5">
+﻿<div class="col-md-10 col-md-offset-1">
+<div class="col-md-offset-5">
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li>
@@ -6,7 +7,7 @@
                     <span aria-hidden="true">&laquo;</span>
                 </a>
             </li>
-            <li><a> {{currentMonthName}} , {{currentYear}} </a></li>
+            <li><a class="text-center" style="width: 150px">{{currentMonthName}} , {{currentYear}} </a></li>
 
             <li>
                 <a  aria-label="Next" (click)="initCalendarForNextMonth()">
@@ -35,8 +36,10 @@
              <td>
                 <div class="calendar-date-box">
                     <p class="text-center calendar-date-text">{{week.monday?.day}}</p>  
-                    <div *ngIf="week.monday?.totalAppintments > 0" class="text-center">
-                       <a (click)="filterAllAppointmentsForDate(week.monday.date)" class="label label-info">{{week.monday.totalAppintments}} entries</a>
+                    <div *ngIf="week.monday?.totalAppintments > 0" class="text-center">                        
+                       <a (click)="filterAllAppointmentsForDate(week.monday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0">
+                           {{week.monday.totalAppintments}} appointments
+                       </a>
                     </div>
                 </div>
             </td>
@@ -45,7 +48,9 @@
                  <div class="calendar-date-box">
                    <p class="text-center calendar-date-text">{{week.tuesday?.day}}</p>  
                      <div *ngIf="week.tuesday?.totalAppintments > 0" class="text-center">
-                       <a class="label label-info">{{week.tuesday.totalAppintments}} entries</a>
+                       <a (click)="filterAllAppointmentsForDate(week.tuesday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0">
+                           {{week.tuesday.totalAppintments}} appointments
+                       </a>
                     </div>
                 </div>
             </td>
@@ -54,7 +59,9 @@
                 <div class="calendar-date-box">
                   <p class="text-center calendar-date-text">{{week.wednesday?.day}}</p>  
                         <div *ngIf="week.wednesday?.totalAppintments > 0" class="text-center">
-                             <a class="label label-info">{{week.wednesday.totalAppintments}} entries</a>
+                             <a   (click)="filterAllAppointmentsForDate(week.wednesday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0">
+                            {{week.wednesday.totalAppintments}} entries
+                        </a>
                     </div>
                 </div>
             </td>
@@ -63,7 +70,9 @@
                 <div class="calendar-date-box">
                   <p class="text-center calendar-date-text">{{week.thursday?.day}}</p>  
                       <div *ngIf="week.thursday?.totalAppintments > 0" class="text-center">
-                            <a class="label label-info">{{week.thursday.totalAppintments}} entries</a>
+                          <a (click)="filterAllAppointmentsForDate(week.thursday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0">
+                                    {{week.thursday.totalAppintments}} appointments
+                        </a>
                     </div>
                 </div>
             </td>
@@ -72,7 +81,9 @@
                 <div class="calendar-date-box">
                   <p class="text-center calendar-date-text">{{week.friday?.day}}</p>  
                      <div *ngIf="week.friday?.totalAppintments > 0" class="text-center">
-                            <a class="label label-info">{{week.friday.totalAppintments}} entries</a>
+                            <a (click)="filterAllAppointmentsForDate(week.friday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0">
+                                {{week.friday.totalAppintments}} appointments
+                             </a>
                     </div>
                 </div>
             </td>
@@ -81,7 +92,9 @@
                 <div class="calendar-date-box">
                   <p class="text-center calendar-date-text">{{week.saturday?.day}}</p>  
                      <div *ngIf="week.saturday?.totalAppintments > 0" class="text-center">
-                            <a class="label label-info">{{week.saturday.totalAppintments}} entries</a>
+                            <a (click)="filterAllAppointmentsForDate(week.saturday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0">
+                                {{week.saturday.totalAppintments}} appointments
+                            </a>
                     </div>
                 </div>
             </td>
@@ -90,7 +103,9 @@
                 <div class="calendar-date-box">
                   <p class="text-center calendar-date-text">{{week.sunday?.day}}</p>  
                        <div *ngIf="week.sunday?.totalAppintments > 0" class="text-center">
-                            <a class="label label-info">{{week.sunday.totalAppintments}} entries</a>
+                            <a (click)="filterAllAppointmentsForDate(week.sunday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0">
+                                {{week.sunday.totalAppintments}} appointments
+                            </a>
                     </div>
                 </div>
             </td>
@@ -106,10 +121,11 @@
         <div class="panel-body  div-lg scroll" >
             <ul class="list-group" *ngFor="let appointment of appointmentsPerDay">                                 
                 <li class="list-group-item ">
-                    <div class="row">
+                    <div class="row">                        
                         <div class="col-md-3"> 
-                           Starts at  :  {{appointment.start.toLocaleTimeString()}}
-                        </div>
+                                   Starts at  :  {{appointment.start.toLocaleTimeString()}}
+                            </div>                         
+                        
                         <div class="col-md-3"> 
                             Ends on :  {{ (appointment.start.toLocaleDateString() === appointment.end.toLocaleDateString()) 
                             ? appointment.end.toLocaleTimeString() 
@@ -121,5 +137,5 @@
         </div>
     </div>
   </div>
-
+</div>
 

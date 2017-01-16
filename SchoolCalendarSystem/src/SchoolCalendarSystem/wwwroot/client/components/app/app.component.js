@@ -27,8 +27,15 @@ require("rxjs/add/operator/map");
 require("rxjs/add/operator/switchMap");
 require("rxjs/add/operator/toPromise");
 var AppComponent = (function () {
-    function AppComponent() {
+    function AppComponent(authService, routerService) {
+        this.authService = authService;
+        this.routerService = routerService;
     }
+    AppComponent.prototype.ngOnInit = function () {
+        if (!this.authService.isUserLoggedIn()) {
+            this.routerService.navigateToRoute("login");
+        }
+    };
     return AppComponent;
 }());
 AppComponent = __decorate([
@@ -38,7 +45,7 @@ AppComponent = __decorate([
         templateUrl: "app.component.html",
         providers: [http_service_1.default, router_service_1.default, auth_service_1.default, appointment_service_1.default, calendar_service_1.default],
     }),
-    __metadata("design:paramtypes", [])
+    __metadata("design:paramtypes", [auth_service_1.default, router_service_1.default])
 ], AppComponent);
 exports.AppComponent = AppComponent;
 //# sourceMappingURL=app.component.js.map

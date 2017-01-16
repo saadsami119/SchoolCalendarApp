@@ -21,7 +21,7 @@ export class AppointmentComponent implements OnInit, UiToast {
         private appointmentService: AppointmentService,
         private authService: AuthService,
         private routerService: RouterService) {                    
-            if (!this.authService.isUserAuthenticated()) {
+            if (!this.authService.isUserLoggedIn()) {
             this.routerService.navigateToRoute("login");
             return;
         }

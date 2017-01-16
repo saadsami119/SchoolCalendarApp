@@ -23,7 +23,7 @@ private logedInUserName : string;
         return this.httpService.get1("/api/account/login",params);
     }
 
-    isUserAuthenticated(): boolean {
+    isUserLoggedIn(): boolean {
        return this.logedInUserId != null;
     }
 
