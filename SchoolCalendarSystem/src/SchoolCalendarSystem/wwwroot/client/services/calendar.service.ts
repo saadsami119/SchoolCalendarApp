@@ -6,8 +6,7 @@ import Appointment from "../models/appointment.model";
 
 @Injectable()
 export default class CalendarService {
-   
-   
+      
     initilizeCalendarForMonth(month : number , year : number, appointments : Array<Appointment>) : CalendarMonth {
           
         let totalDaysInMonth =  this.getTotalDayInMonth(month,year);
@@ -20,25 +19,25 @@ export default class CalendarService {
             
              switch (dayOfWeek) { // 1 is Monday and 0 is Sunday
                 case 1:
-                    calendarWeek.monday = new CalendarDay(day, this.getAllAppointmentsForDate(currentDate,appointments));
+                    calendarWeek.monday = new CalendarDay(day,currentDate, this.getAllAppointmentsForDate(currentDate,appointments));
                     break;
                 case 2:
-                    calendarWeek.tuesday  = new CalendarDay(day, this.getAllAppointmentsForDate(currentDate,appointments));
+                    calendarWeek.tuesday  = new CalendarDay(day, currentDate,this.getAllAppointmentsForDate(currentDate,appointments));
                     break;
                 case 3:
-                    calendarWeek.wednesday  = new CalendarDay(day, this.getAllAppointmentsForDate(currentDate,appointments));
+                    calendarWeek.wednesday  = new CalendarDay(day, currentDate,this.getAllAppointmentsForDate(currentDate,appointments));
                     break;
                 case 4:
-                    calendarWeek.thursday  = new CalendarDay(day, this.getAllAppointmentsForDate(currentDate,appointments));
+                    calendarWeek.thursday  = new CalendarDay(day,currentDate, this.getAllAppointmentsForDate(currentDate,appointments));
                     break;
                 case 5:
-                    calendarWeek.friday  = new CalendarDay(day, this.getAllAppointmentsForDate(currentDate,appointments));
+                    calendarWeek.friday  = new CalendarDay(day,currentDate, this.getAllAppointmentsForDate(currentDate,appointments));
                     break;
                 case 6:
-                    calendarWeek.saturday  = new CalendarDay(day, this.getAllAppointmentsForDate(currentDate,appointments));
+                    calendarWeek.saturday  = new CalendarDay(day,currentDate, this.getAllAppointmentsForDate(currentDate,appointments));
                     break;
                 case 0:
-                    calendarWeek.sunday = new CalendarDay(day, this.getAllAppointmentsForDate(currentDate,appointments));
+                    calendarWeek.sunday = new CalendarDay(day,currentDate, this.getAllAppointmentsForDate(currentDate,appointments));
                     calendarMonth.weeks.push(calendarWeek);
                     calendarWeek = new CalendarWeek();
                     break;
@@ -53,7 +52,7 @@ export default class CalendarService {
         return new Date(year, 1 + month, 0).getDate();
     }
 
-     private getDate(year : number,month : number , day : number) : Date {
+    private getDate(year : number,month : number , day : number) : Date {
       return new Date(year, month, day);
     } 
 
@@ -61,15 +60,12 @@ export default class CalendarService {
         let filterDates : Array<Appointment> = new Array<Appointment>();
         let end = date;                
 
-        for(let appointment of monthlyAppointment)
-        {
-            console.log(appointment.start);
+        for(let appointment of monthlyAppointment){           
             if(appointment.start >= date && appointment.start <= end){
                 filterDates.push(appointment);              
             }
         }
 
         return filterDates;        
-    }
-    
+    }    
 }

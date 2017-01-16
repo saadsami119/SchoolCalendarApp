@@ -9,6 +9,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require("@angular/core");
+var http_service_1 = require("../../services/http.service");
+var router_service_1 = require("../../services/router.service");
+var auth_service_1 = require("../../services/auth.service");
+var appointment_service_1 = require("../../services/appointment.service");
+var calendar_service_1 = require("../../services/calendar.service");
 // import 'rxjs/Rx'; // adds ALL RxJS statics & operators to Observable
 // See node_module/rxjs/Rxjs.js
 // Import just the rxjs statics and operators needed for THIS app.
@@ -30,7 +35,8 @@ AppComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: 'my-app',
-        templateUrl: "app.component.html"
+        templateUrl: "app.component.html",
+        providers: [http_service_1.default, router_service_1.default, auth_service_1.default, appointment_service_1.default, calendar_service_1.default],
     }),
     __metadata("design:paramtypes", [])
 ], AppComponent);

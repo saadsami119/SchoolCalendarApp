@@ -12,7 +12,7 @@ export default class AuthService {
 private logedInUserId : number;
 private logedInUserName : string;
 
-    constructor(private httpService: HttpService) {
+    constructor(private httpService: HttpService) {       
     }
 
     authenticateUser(user: User): Observable<number> {
@@ -27,8 +27,12 @@ private logedInUserName : string;
        return this.logedInUserId != null;
     }
 
-    setLogedInUserInfo(userId : number, username : string){
+    setLogedInUserInfo(userId : number, username : string) : void{
         this.logedInUserName = username;
         this.logedInUserId = userId;
+    }
+
+    getLoginUserName():string{
+        return  this.logedInUserName;
     }
 }

@@ -1,4 +1,9 @@
 ﻿import { Component } from '@angular/core';
+import  HttpService  from '../../services/http.service';
+import  RouterService  from '../../services/router.service';
+import  AuthService  from "../../services/auth.service";
+import  AppointmentService  from "../../services/appointment.service";
+import CalendarService from "../../services/calendar.service";
 // import 'rxjs/Rx'; // adds ALL RxJS statics & operators to Observable
 
 // See node_module/rxjs/Rxjs.js
@@ -18,6 +23,8 @@ import 'rxjs/add/operator/toPromise';
 @Component({
     moduleId: module.id,
     selector: 'my-app',
-    templateUrl: "app.component.html"
+    templateUrl: "app.component.html",
+    providers: [HttpService, RouterService, AuthService, AppointmentService, CalendarService],
     })
+
 export class AppComponent { }

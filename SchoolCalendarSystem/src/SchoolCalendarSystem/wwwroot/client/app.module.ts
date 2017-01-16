@@ -4,12 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NKDatetimeModule } from 'ng2-datetime/ng2-datetime';
 import { HttpModule } from '@angular/http';
-
-import  HttpService  from './services/http.service';
-import  RouterService  from './services/router.service';
-import  AuthService  from "./services/auth.service";
-import  AppointmentService  from "./services/appointment.service";
-import CalendarService from "./services/calendar.service";
 import { AppComponent } from './components/app/app.component';
 import { AppointmentComponent } from "./components/appointment/appointment.component";
 import { CalendarComponent } from "./components/calendar/calendar.component";
@@ -27,13 +21,9 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-    imports: [BrowserModule,
-        HttpModule,
-        ReactiveFormsModule,
-        RouterModule.forRoot(appRoutes),
-        NKDatetimeModule],
-    declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent, LoginComponent, ToastComponent, UnlessDirective],
-    providers: [HttpService, RouterService, AuthService, AppointmentService,CalendarService],
+    imports: [BrowserModule, HttpModule,ReactiveFormsModule,RouterModule.forRoot(appRoutes),NKDatetimeModule],
+    declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent, LoginComponent, ToastComponent, UnlessDirective],   
     bootstrap: [AppComponent]
 })
+
 export class AppModule { }

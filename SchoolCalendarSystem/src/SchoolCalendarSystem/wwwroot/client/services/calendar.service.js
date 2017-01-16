@@ -24,25 +24,25 @@ var CalendarService = (function () {
             var dayOfWeek = currentDate.getDay();
             switch (dayOfWeek) {
                 case 1:
-                    calendarWeek.monday = new calendarDay_model_1.default(day, this.getAllAppointmentsForDate(currentDate, appointments));
+                    calendarWeek.monday = new calendarDay_model_1.default(day, currentDate, this.getAllAppointmentsForDate(currentDate, appointments));
                     break;
                 case 2:
-                    calendarWeek.tuesday = new calendarDay_model_1.default(day, this.getAllAppointmentsForDate(currentDate, appointments));
+                    calendarWeek.tuesday = new calendarDay_model_1.default(day, currentDate, this.getAllAppointmentsForDate(currentDate, appointments));
                     break;
                 case 3:
-                    calendarWeek.wednesday = new calendarDay_model_1.default(day, this.getAllAppointmentsForDate(currentDate, appointments));
+                    calendarWeek.wednesday = new calendarDay_model_1.default(day, currentDate, this.getAllAppointmentsForDate(currentDate, appointments));
                     break;
                 case 4:
-                    calendarWeek.thursday = new calendarDay_model_1.default(day, this.getAllAppointmentsForDate(currentDate, appointments));
+                    calendarWeek.thursday = new calendarDay_model_1.default(day, currentDate, this.getAllAppointmentsForDate(currentDate, appointments));
                     break;
                 case 5:
-                    calendarWeek.friday = new calendarDay_model_1.default(day, this.getAllAppointmentsForDate(currentDate, appointments));
+                    calendarWeek.friday = new calendarDay_model_1.default(day, currentDate, this.getAllAppointmentsForDate(currentDate, appointments));
                     break;
                 case 6:
-                    calendarWeek.saturday = new calendarDay_model_1.default(day, this.getAllAppointmentsForDate(currentDate, appointments));
+                    calendarWeek.saturday = new calendarDay_model_1.default(day, currentDate, this.getAllAppointmentsForDate(currentDate, appointments));
                     break;
                 case 0:
-                    calendarWeek.sunday = new calendarDay_model_1.default(day, this.getAllAppointmentsForDate(currentDate, appointments));
+                    calendarWeek.sunday = new calendarDay_model_1.default(day, currentDate, this.getAllAppointmentsForDate(currentDate, appointments));
                     calendarMonth.weeks.push(calendarWeek);
                     calendarWeek = new calendarWeek_model_1.default();
                     break;
@@ -63,7 +63,6 @@ var CalendarService = (function () {
         var end = date;
         for (var _i = 0, monthlyAppointment_1 = monthlyAppointment; _i < monthlyAppointment_1.length; _i++) {
             var appointment = monthlyAppointment_1[_i];
-            console.log(appointment.start);
             if (appointment.start >= date && appointment.start <= end) {
                 filterDates.push(appointment);
             }

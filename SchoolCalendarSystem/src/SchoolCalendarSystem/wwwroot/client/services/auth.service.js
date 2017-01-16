@@ -28,6 +28,9 @@ var AuthService = (function () {
         this.logedInUserName = username;
         this.logedInUserId = userId;
     };
+    AuthService.prototype.getLoginUserName = function () {
+        return this.logedInUserName;
+    };
     return AuthService;
 }());
 AuthService = __decorate([

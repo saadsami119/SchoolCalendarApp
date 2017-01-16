@@ -14,14 +14,16 @@ var NavMenuComponent = (function () {
     function NavMenuComponent(authService) {
         this.authService = authService;
     }
+    NavMenuComponent.prototype.ngOnInit = function () {
+        this.loginedInUserName = this.authService.getLoginUserName();
+    };
     return NavMenuComponent;
 }());
 NavMenuComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: 'nav-menu',
-        templateUrl: "navmenu.component.html",
-        providers: [auth_service_1.default]
+        templateUrl: "navmenu.component.html"
     }),
     __metadata("design:paramtypes", [auth_service_1.default])
 ], NavMenuComponent);

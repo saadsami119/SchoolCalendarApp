@@ -9,9 +9,7 @@ import RouterService from "../../services/router.service";
 @Component({
     moduleId: module.id,
     selector: "calendar",
-    templateUrl: "calendar.component.html",
-    providers: [AuthService,AppointmentService,CalendarService]
-
+    templateUrl: "calendar.component.html"  
 })
 
 export class CalendarComponent implements OnInit {
@@ -20,6 +18,8 @@ export class CalendarComponent implements OnInit {
     public currentMonthName: string;
     public currentYear: number;
     private _currentMonth: number;
+    public appointmentsPerDay : Array<Appointment>;
+    public appointmentPerMonth : Array<Appointment>;
 
     constructor(private authService: AuthService,               
                 private appointmentService : AppointmentService, 
@@ -31,7 +31,7 @@ export class CalendarComponent implements OnInit {
         //     //this.routerService.navigateToRoute("login");
         //     return;
         // }
-        this.calendarMonth = new CalendarMonth();
+        this.calendarMonth = new CalendarMonth();     
         this._currentMonth = this.getCurrentMonth();
         this.currentMonthName = this.getCurrentMonthName();        
         this.currentYear = this.getCurrentYear();
@@ -39,14 +39,14 @@ export class CalendarComponent implements OnInit {
         this.initilizeMonthlyCalendar();
     }
 
-    initilizeMonthlyCalendar(): void {      
-         this.appointmentService.getAppointmentsForMonth(12,2016)        
-         
+    initilizeMonthlyCalendar(): void {               
+         this.appointmentService.getAppointmentsForMonth(12,2016)
           .subscribe(monthlyAppointments =>
-          {      
-            this.calendarMonth =   this.calendarService.initilizeCalendarForMonth(this._currentMonth,this.currentYear,monthlyAppointments);          
-          });      
-        
+          { 
+            this.appointmentPerMonth = new Array<Appointment>();
+            this.appointmentPerMonth = monthlyAppointments;
+            this.calendarMonth =   this.calendarService.initilizeCalendarForMonth(this._currentMonth,this.currentYear,this.appointmentPerMonth);          
+          });
     }
 
     initCalendarForNextMonth(): void {
@@ -58,6 +58,17 @@ export class CalendarComponent implements OnInit {
        }
         this.currentMonthName = new Date(this.currentYear, this._currentMonth, 1).toLocaleString("en-us", { month: "long" });
         this.initilizeMonthlyCalendar();
+    }
+
+    filterAllAppointmentsForDate(date : Date) : void{       
+        this.appointmentsPerDay = new Array<Appointment>();
+         let end = date;                
+
+         for(let appointment of this.appointmentPerMonth){           
+              if(appointment.start >= date && appointment.start <= end){
+                 this.appointmentsPerDay.push(appointment);              
+              }
+          }        
     }
 
     initCalendarForPreviousMonth(): void {

@@ -1,15 +1,21 @@
-﻿import { Component } from '@angular/core';
+﻿import { Component, OnInit } from '@angular/core';
 import  AuthService from "../../services/auth.service";
 @Component({
     moduleId: module.id,
     selector: 'nav-menu',
-    templateUrl: "navmenu.component.html",
-    providers: [AuthService]
-    
+    templateUrl: "navmenu.component.html"    
 })
-export default class NavMenuComponent {
+
+export default class NavMenuComponent implements OnInit{
+    loginedInUserName : string;
 
     constructor(private authService: AuthService) {       
+    }
+
+    ngOnInit(){
+        this.loginedInUserName = this.authService.getLoginUserName();
+
+
     }
 
 }

@@ -7,9 +7,9 @@
                 <span class='icon-bar'></span>
                 <span class='icon-bar'></span>
             </button>
-            <a class='navbar-brand' [routerLink]="['/']">School Calendar App</a>
+            <a class='navbar-brand' [routerLink]="['/']">Calendar App</a>
         </div>
-        <div class='clearfix'></div>
+     
         <div class='navbar-collapse collapse'>
             <ul class='nav navbar-nav'>
                 <li [routerLinkActive]="['link-active']">
@@ -18,14 +18,14 @@
                     </a>
                 </li>
                 <li [routerLinkActive]="['link-active']">
-                    <a class="disabled" [routerLink]="['/calendar']">" 
+                    <a class="disabled" [routerLink]="['/calendar']">
                         <span class='glyphicon glyphicon-education'></span> Calendar
                     </a>
                 </li>
 
                 <li [routerLinkActive]="['link-active']">
                     <a [routerLink]="['/calendar']">
-                        <span class='glyphicon glyphicon-education'></span> Saad Sami
+                        <span class='glyphicon glyphicon-education'></span> {{loginedInUserName === "" ? "SignIn" :  "SignIn"}}
                     </a>
                 </li>
 

@@ -9,7 +9,7 @@ import { UiToast } from "../../interfaces/toast.interface";
 @Component({
     moduleId: module.id,
     selector: "login",
-    templateUrl: "login.component.html"
+    templateUrl: "login.component.html"     
 })
 
 export default class LoginComponent implements OnInit, UiToast {

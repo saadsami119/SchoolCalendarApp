@@ -10,7 +10,7 @@ import  RouterService  from "../../services/router.service";
 @Component({
     moduleId: module.id,
     selector: "appoitnment",
-    templateUrl: "appointment.component.html"
+    templateUrl: "appointment.component.html"    
 })
 
 export class AppointmentComponent implements OnInit, UiToast {
@@ -20,15 +20,14 @@ export class AppointmentComponent implements OnInit, UiToast {
     constructor(private formBuilder: FormBuilder,
         private appointmentService: AppointmentService,
         private authService: AuthService,
-        private routerService: RouterService) {
-
-          if (!this.authService.isUserAuthenticated()) {
+        private routerService: RouterService) {                    
+            if (!this.authService.isUserAuthenticated()) {
             this.routerService.navigateToRoute("login");
             return;
         }
     }
 
-    ngOnInit() {
+    ngOnInit() {                
         this.appointmentForm = this.formBuilder.group({
             startDate: [null, Validators.required],
             startTime: [null, Validators.required],
@@ -36,6 +35,7 @@ export class AppointmentComponent implements OnInit, UiToast {
             endTime: [null, Validators.required],
             description: [null, Validators.required]
         });
+
         this.toast = new Toast();
     }
 

@@ -34,7 +34,9 @@ var CalendarComponent = (function () {
         var _this = this;
         this.appointmentService.getAppointmentsForMonth(12, 2016)
             .subscribe(function (monthlyAppointments) {
-            _this.calendarMonth = _this.calendarService.initilizeCalendarForMonth(_this._currentMonth, _this.currentYear, monthlyAppointments);
+            _this.appointmentPerMonth = new Array();
+            _this.appointmentPerMonth = monthlyAppointments;
+            _this.calendarMonth = _this.calendarService.initilizeCalendarForMonth(_this._currentMonth, _this.currentYear, _this.appointmentPerMonth);
         });
     };
     CalendarComponent.prototype.initCalendarForNextMonth = function () {
@@ -47,6 +49,16 @@ var CalendarComponent = (function () {
         }
         this.currentMonthName = new Date(this.currentYear, this._currentMonth, 1).toLocaleString("en-us", { month: "long" });
         this.initilizeMonthlyCalendar();
+    };
+    CalendarComponent.prototype.filterAllAppointmentsForDate = function (date) {
+        this.appointmentsPerDay = new Array();
+        var end = date;
+        for (var _i = 0, _a = this.appointmentPerMonth; _i < _a.length; _i++) {
+            var appointment = _a[_i];
+            if (appointment.start >= date && appointment.start <= end) {
+                this.appointmentsPerDay.push(appointment);
+            }
+        }
     };
     CalendarComponent.prototype.initCalendarForPreviousMonth = function () {
         if (this._currentMonth === 0) {
@@ -74,8 +86,7 @@ CalendarComponent = __decorate([
     core_1.Component({
         moduleId: module.id,
         selector: "calendar",
-        templateUrl: "calendar.component.html",
-        providers: [auth_service_1.default, appointment_service_1.default, calendar_service_1.default]
+        templateUrl: "calendar.component.html"
     }),
     __metadata("design:paramtypes", [auth_service_1.default,
         appointment_service_1.default,

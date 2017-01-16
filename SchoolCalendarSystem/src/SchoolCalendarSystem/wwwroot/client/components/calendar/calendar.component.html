@@ -1,6 +1,4 @@
-﻿
-
-<div class="col-md-offset-5">
+﻿<div class="col-md-offset-5">
     <nav aria-label="Page navigation">
         <ul class="pagination">
             <li>
@@ -19,6 +17,7 @@
     </nav>
 </div>
 
+<div class="table-responsive">
 <table class="table table-bordered table-condensed">
     <thead>
         <tr>
@@ -33,67 +32,94 @@
     </thead>
     <tbody>
         <tr *ngFor="let week of calendarMonth.weeks">
-            <td>
-                <div class="well">
-                    {{week.monday?.day}}
-                    <div *ngIf="week.monday?.totalAppintments > 0">
-                       <a class="label label-primary">{{week.monday.totalAppintments}} entries</a>
+             <td>
+                <div class="calendar-date-box">
+                    <p class="text-center calendar-date-text">{{week.monday?.day}}</p>  
+                    <div *ngIf="week.monday?.totalAppintments > 0" class="text-center">
+                       <a (click)="filterAllAppointmentsForDate(week.monday.date)" class="label label-info">{{week.monday.totalAppintments}} entries</a>
                     </div>
                 </div>
             </td>
 
-            <td>
-                <div class="well">
-                    {{week.tuesday?.day}}
-                      <div *ngIf="week.tuesday?.totalAppintments > 0">
-                        <a href="#"><span class="badge">week.tuesday.totalAppintments</span></a>>
+            <td >
+                 <div class="calendar-date-box">
+                   <p class="text-center calendar-date-text">{{week.tuesday?.day}}</p>  
+                     <div *ngIf="week.tuesday?.totalAppintments > 0" class="text-center">
+                       <a class="label label-info">{{week.tuesday.totalAppintments}} entries</a>
                     </div>
                 </div>
             </td>
 
-            <td>
-                <div class="well">
-                    {{week.wednesday?.day}}
-                      <div *ngIf="week.wednesday?.totalAppintments > 0">
-                        <a href="#"><span class="badge">week.wednesday.totalAppintments</span></a>>
+             <td>
+                <div class="calendar-date-box">
+                  <p class="text-center calendar-date-text">{{week.wednesday?.day}}</p>  
+                        <div *ngIf="week.wednesday?.totalAppintments > 0" class="text-center">
+                             <a class="label label-info">{{week.wednesday.totalAppintments}} entries</a>
                     </div>
                 </div>
             </td>
 
-            <td>
-                <div class="well">
-                    {{week.thursday?.day}}
-                     <div *ngIf="week.thursday?.totalAppintments > 0">
-                        <a href="#"><span class="badge">week.thursday.totalAppintments</span></a>>
+             <td>
+                <div class="calendar-date-box">
+                  <p class="text-center calendar-date-text">{{week.thursday?.day}}</p>  
+                      <div *ngIf="week.thursday?.totalAppintments > 0" class="text-center">
+                            <a class="label label-info">{{week.thursday.totalAppintments}} entries</a>
                     </div>
                 </div>
             </td>
-            <td>
-                <div class="well">
-                    {{week.friday?.day}}
-                     <div *ngIf="week.friday?.totalAppintments > 0">
-                        <a href="#"><span class="badge">week.friday.totalAppintments</span></a>>
+
+              <td>
+                <div class="calendar-date-box">
+                  <p class="text-center calendar-date-text">{{week.friday?.day}}</p>  
+                     <div *ngIf="week.friday?.totalAppintments > 0" class="text-center">
+                            <a class="label label-info">{{week.friday.totalAppintments}} entries</a>
                     </div>
                 </div>
             </td>
-            <td>
-                <div class="well">
-                    {{week.saturday?.day}}
-                     <div *ngIf="week.saturday?.totalAppintments > 0">
-                        <a href="#"><span class="badge">week.saturday.totalAppintments</span></a>>
+
+              <td>
+                <div class="calendar-date-box">
+                  <p class="text-center calendar-date-text">{{week.saturday?.day}}</p>  
+                     <div *ngIf="week.saturday?.totalAppintments > 0" class="text-center">
+                            <a class="label label-info">{{week.saturday.totalAppintments}} entries</a>
                     </div>
                 </div>
             </td>
-            <td>
-                <div class="well">
-                    {{week.sunday?.day}}
-                     <div *ngIf="week.sunday?.totalAppintments > 0">
-                        <a href="#"><span class="badge">week.sunday.totalAppintments</span></a>>
+
+             <td>
+                <div class="calendar-date-box">
+                  <p class="text-center calendar-date-text">{{week.sunday?.day}}</p>  
+                       <div *ngIf="week.sunday?.totalAppintments > 0" class="text-center">
+                            <a class="label label-info">{{week.sunday.totalAppintments}} entries</a>
                     </div>
                 </div>
             </td>
+        
         </tr>
-    </tbody>
+    </tbody>  
 </table>
+</div>
+
+  <div>
+    <div class="panel panel-info">
+        <div class="panel-heading"> Appointments</div>
+        <div class="panel-body  div-lg scroll" >
+            <ul class="list-group" *ngFor="let appointment of appointmentsPerDay">                                 
+                <li class="list-group-item ">
+                    <div class="row">
+                        <div class="col-md-3"> 
+                           Starts at  :  {{appointment.start.toLocaleTimeString()}}
+                        </div>
+                        <div class="col-md-3"> 
+                            Ends on :  {{ (appointment.start.toLocaleDateString() === appointment.end.toLocaleDateString()) 
+                            ? appointment.end.toLocaleTimeString() 
+                            : appointment.end.toLocaleDateString() + appointment.end.toLocaleTimeString()   }}
+                        </div>
+                   </div>
+                </li>            
+            </ul>
+        </div>
+    </div>
+  </div>
 
 
