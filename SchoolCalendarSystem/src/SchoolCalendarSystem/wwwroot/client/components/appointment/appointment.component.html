@@ -1,49 +1,48 @@
-﻿
-<div>
-    <toast [type]='toast.type' [message]='toast.message' [caption]='toast.caption' [show]='toast.show'></toast>
+﻿<div>
+    <alert [show]='alerts'></alert>
 </div>
-<!--<form [formGroup]="appointmentForm">
-    <input formControlName="start" type="date" class="form-control">
-    <input formControlName="start" type="time" class="form-control">
-    <button type="submit" class="btn btn-primary col-md-offset-10" (click)="createAppointment(appointmentForm.value, appointmentForm.valid)">Create</button>
-</form>-->
-<div>
-    <div class="col-md-12">
-        <div class="panel panel-default">
-            <div class="panel-heading">New Appointment</div>
-            <div class="panel-body">
-                <form [formGroup]="appointmentForm">
-                    <div class="row form-group" [ngClass]="{'has-error': !appointmentForm.controls.startDate.valid || !appointmentForm.controls.startTime.valid}">
-                        <div class="col-md-3">
-                            <label>Start on </label>
-                            <datetime formControlName="startDate" [timepicker]="false"></datetime>
-                        </div>
-                        <div class="col-md-3">
-                            <label>at </label>
-                            <datetime formControlName="startTime" [datepicker]="false"></datetime>
-                        </div>
-                    </div>
-                    <div class="row form-group" [ngClass]="{'has-error': !appointmentForm.controls.endDate.valid || !appointmentForm.controls.endTime.valid}">
-                        <div class="col-md-3">
-                            <label>End on </label>
-                            <datetime formControlName="endDate" [timepicker]="false"></datetime>
-                        </div>
-                        <div class="col-md-3">
-                            <label>at </label>
-                            <datetime formControlName="endTime" [datepicker]="false"></datetime>
-                        </div>
 
-                    </div>
-                    <div class="form-group" [ngClass]="{'has-error': !appointmentForm.controls.description.valid}">
-                        <label>Description</label>
-                        <textarea rows="4" formControlName="description" class="form-control"></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary col-md-offset-10" (click)="createAppointment(appointmentForm.value, appointmentForm.valid)" [disabled]="!appointmentForm.valid">Create</button>
-                    </div>
-                </form>
+<div class="container">
+    <div class="well infobox col-md-6">
+        <form [formGroup]="appointmentForm">
+            <legend>New Appointment</legend>
+
+            <div class="row form-group" [ngClass]="{'has-error': !appointmentForm.controls.startDate.valid || !appointmentForm.controls.startTime.valid}">
+                <div class="form-group label-floating col-md-6">
+                    <label class="control-label">Starts On</label>
+                    <datetime formControlName="startDate" [timepicker]="false" [datepicker]="{placeholder:' ', autoclose: true,todayBtn: 'linked',todayHighlight: true,assumeNearbyYear: true,format: 'D, d MM yyyy'}"></datetime>
+                </div>
+                <div class="form-group label-floating col-md-5">
+                    <label class="control-label">at</label>
+                    <datetime formControlName="startTime" [datepicker]="false" [timepicker]="{ placeholder:' '}"></datetime>
+                </div>
             </div>
-        </div>
-    </div>
 
+            <div class="row form-group" [ngClass]="{'has-error': !appointmentForm.controls.endDate.valid || !appointmentForm.controls.endTime.valid}">
+                <div class="col-md-6">
+                    <label class="control-label">End on </label>
+                    <datetime formControlName="endDate" [timepicker]="false" [datepicker]="{placeholder:' ', autoclose: true,todayBtn: 'linked',todayHighlight: true,assumeNearbyYear: true,format: 'D, d MM yyyy'}"></datetime>
+                </div>
+                <div class="col-md-5">
+                    <label class="control-label">at</label>
+                    <datetime formControlName="endTime" [datepicker]="false" [timepicker]="{ placeholder:' '}"></datetime>
+                </div>
+            </div>
+            
+            <div class="form-group label-floating">
+                <label class="control-label" for="description"> Description</label>
+                 <textarea rows="4" class="form-control" id="description" type="text" formControlName="description"> </textarea>               
+                
+            </div>
+              <div class="row">
+                <div class="col-xs-8">
+                </div>
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-raised btn-success" (click)="createAppointment(appointmentForm.value, appointmentForm.valid)"
+                    [disabled]="!appointmentForm.valid">Create</button>
+                </div>
+            </div>
+           
+        </form>
+    </div>
 </div>

@@ -35,7 +35,7 @@ export class AppComponent implements OnInit {
 
        if(!this.authService.isUserLoggedIn()){
             this.routerService.navigateToRoute("login")
-        }
+                }
         
     }
 

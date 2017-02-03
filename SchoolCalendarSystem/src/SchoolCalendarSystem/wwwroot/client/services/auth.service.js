@@ -31,6 +31,9 @@ var AuthService = (function () {
     AuthService.prototype.getLoginUserName = function () {
         return this.logedInUserName;
     };
+    AuthService.prototype.getLogedInUserId = function () {
+        return this.logedInUserId;
+    };
     return AuthService;
 }());
 AuthService = __decorate([

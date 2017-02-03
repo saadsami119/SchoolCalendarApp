@@ -8,21 +8,24 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var core_1 = require('@angular/core');
-var platform_browser_1 = require('@angular/platform-browser');
-var app_component_1 = require('./app.component');
-var AppModule = (function () {
-    function AppModule() {
+var core_1 = require("@angular/core");
+var toast_model_1 = require("../models/toast.model");
+var UiService = (function () {
+    function UiService() {
     }
-    AppModule = __decorate([
-        core_1.NgModule({
-            imports: [platform_browser_1.BrowserModule],
-            declarations: [app_component_1.AppComponent],
-            bootstrap: [app_component_1.AppComponent]
-        }), 
-        __metadata('design:paramtypes', [])
-    ], AppModule);
-    return AppModule;
+    UiService.prototype.getErrorToast = function (msg) {
+        var toast = new toast_model_1.default();
+        toast.caption = "Error! ";
+        toast.message = msg;
+        toast.type = "error";
+        return toast;
+    };
+    return UiService;
 }());
-exports.AppModule = AppModule;
-//# sourceMappingURL=app.module.js.map
+UiService = __decorate([
+    core_1.Injectable(),
+    __metadata("design:paramtypes", [])
+], UiService);
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = UiService;
+//# sourceMappingURL=uiService.js.map

@@ -60,10 +60,9 @@ var CalendarService = (function () {
     };
     CalendarService.prototype.getAllAppointmentsForDate = function (date, monthlyAppointment) {
         var filterDates = new Array();
-        var end = date;
         for (var _i = 0, monthlyAppointment_1 = monthlyAppointment; _i < monthlyAppointment_1.length; _i++) {
             var appointment = monthlyAppointment_1[_i];
-            if (appointment.start >= date && appointment.start <= end) {
+            if (appointment.start.getDate() === date.getDate()) {
                 filterDates.push(appointment);
             }
         }

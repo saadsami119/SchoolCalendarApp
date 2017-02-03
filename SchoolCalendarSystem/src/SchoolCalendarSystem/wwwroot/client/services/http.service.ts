@@ -32,6 +32,7 @@ export default class HttpService {
     }
 
     private parseErrorMsg(error: Response | any) {
+        alert(error);
         let errMsg: string;
         if (error instanceof Response) {
             const body = error.json() || '';
@@ -39,8 +40,7 @@ export default class HttpService {
             errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
         } else {
             errMsg = error.message ? error.message : error.toString();
-        }
-        console.error(errMsg);
+        }        
         return Observable.throw(errMsg);
     }
 

@@ -32,7 +32,7 @@ var CalendarComponent = (function () {
     };
     CalendarComponent.prototype.initilizeMonthlyCalendar = function () {
         var _this = this;
-        this.appointmentService.getAppointmentsForMonth(12, 2016)
+        this.appointmentService.getAppointmentsForMonth(this._currentMonth + 1, this.currentYear)
             .subscribe(function (monthlyAppointments) {
             _this.appointmentPerMonth = new Array();
             _this.appointmentPerMonth = monthlyAppointments;
@@ -50,16 +50,6 @@ var CalendarComponent = (function () {
         this.currentMonthName = new Date(this.currentYear, this._currentMonth, 1).toLocaleString("en-us", { month: "long" });
         this.initilizeMonthlyCalendar();
     };
-    CalendarComponent.prototype.filterAllAppointmentsForDate = function (date) {
-        this.appointmentsPerDay = new Array();
-        var end = date;
-        for (var _i = 0, _a = this.appointmentPerMonth; _i < _a.length; _i++) {
-            var appointment = _a[_i];
-            if (appointment.start >= date && appointment.start <= end) {
-                this.appointmentsPerDay.push(appointment);
-            }
-        }
-    };
     CalendarComponent.prototype.initCalendarForPreviousMonth = function () {
         if (this._currentMonth === 0) {
             this.currentYear = this.currentYear - 1;
@@ -70,6 +60,16 @@ var CalendarComponent = (function () {
         }
         this.currentMonthName = new Date(this.currentYear, this._currentMonth, 1).toLocaleString("en-us", { month: "long" });
         this.initilizeMonthlyCalendar();
+    };
+    CalendarComponent.prototype.filterAllAppointmentsForDate = function (date) {
+        this.appointmentsPerDay = new Array();
+        this.selectedDate = date.toDateString();
+        for (var _i = 0, _a = this.appointmentPerMonth; _i < _a.length; _i++) {
+            var appointment = _a[_i];
+            if (appointment.start.getDate() === date.getDate()) {
+                this.appointmentsPerDay.push(appointment);
+            }
+        }
     };
     CalendarComponent.prototype.getCurrentMonth = function () {
         return new Date().getMonth();

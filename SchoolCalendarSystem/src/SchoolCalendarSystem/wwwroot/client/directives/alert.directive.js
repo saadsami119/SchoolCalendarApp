@@ -35,7 +35,9 @@ __decorate([
     __metadata("design:paramtypes", [Boolean])
 ], UnlessDirective.prototype, "myUnless", null);
 UnlessDirective = __decorate([
-    core_1.Directive({ selector: '[myUnless]' }),
+    core_1.Directive({
+        selector: '[myUnless]',
+    }),
     __metadata("design:paramtypes", [core_2.TemplateRef, core_2.ViewContainerRef])
 ], UnlessDirective);
 exports.UnlessDirective = UnlessDirective;

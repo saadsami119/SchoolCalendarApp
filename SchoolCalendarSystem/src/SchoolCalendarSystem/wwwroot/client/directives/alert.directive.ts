@@ -1,17 +1,21 @@
 ﻿import { Directive, Input } from '@angular/core';
 import { TemplateRef, ViewContainerRef } from '@angular/core';
+import { Observable } from 'rxjs/Rx';
 
-@Directive({ selector: '[myUnless]' })
+@Directive({ 
+    selector: '[myUnless]',   
+})
+
 export class UnlessDirective {
 
-    constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {
-        
+    constructor(private templateRef: TemplateRef<any>, private viewContainer: ViewContainerRef) {        
     }
+
 
     @Input() set myUnless(condition: boolean) {
         if (condition) {
             this.viewContainer.createEmbeddedView(this.templateRef);
-        } else {
+    } else {
             this.viewContainer.clear();
         }
     }

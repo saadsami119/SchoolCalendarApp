@@ -12,7 +12,7 @@ var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
 var auth_service_1 = require("../../services/auth.service");
 var router_service_1 = require("../../services/router.service");
-var toast_model_1 = require("../../models/toast.model");
+var alert_model_1 = require("../../models/alert.model");
 var LoginComponent = (function () {
     function LoginComponent(formBuilder, authService, routerService) {
         this.formBuilder = formBuilder;
@@ -21,22 +21,22 @@ var LoginComponent = (function () {
     }
     LoginComponent.prototype.ngOnInit = function () {
         this.loginForm = this.formBuilder.group({
-            username: ['saad@gmail.com', forms_1.Validators.required],
+            username: ['saad@gmail.com', forms_1.Validators.compose([forms_1.Validators.required, forms_1.Validators.pattern("^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$")])],
             password: ['saad', forms_1.Validators.required]
         });
-        this.toast = new toast_model_1.default();
+        this.alerts = new Array();
     };
     LoginComponent.prototype.loginUser = function (user, isValid) {
         var _this = this;
         this.authService.authenticateUser(user)
             .subscribe(function (authenticatedUserId) {
             if (authenticatedUserId == null) {
-                _this.toast.errorToast("Invalid username or pasword. Please try again.", "Login Failure !");
+                _this.alerts.push(new alert_model_1.default("Invalid username or pasword. Please try again.", "error", "Failure !"));
                 return;
             }
             _this.authService.setLogedInUserInfo(authenticatedUserId, user.username);
             _this.routerService.navigateToRoute("calendar");
-        }, function (error) { _this.toast.errorToast(error, "Error!"); });
+        }, function (error) { _this.alerts.push(new alert_model_1.default(error, "error", "Failure !")); });
     };
     return LoginComponent;
 }());

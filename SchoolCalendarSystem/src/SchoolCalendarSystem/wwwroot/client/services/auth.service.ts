@@ -35,4 +35,8 @@ private logedInUserName : string;
     getLoginUserName():string{
         return  this.logedInUserName;
     }
+
+    getLogedInUserId() : number{
+        return  this.logedInUserId;
+    }
 }

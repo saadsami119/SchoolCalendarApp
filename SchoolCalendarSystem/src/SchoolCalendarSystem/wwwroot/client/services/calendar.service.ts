@@ -58,10 +58,10 @@ export default class CalendarService {
 
     private getAllAppointmentsForDate(date : Date , monthlyAppointment : Array<Appointment>) : Array<Appointment>{
         let filterDates : Array<Appointment> = new Array<Appointment>();
-        let end = date;                
+        
 
         for(let appointment of monthlyAppointment){           
-            if(appointment.start >= date && appointment.start <= end){
+            if(appointment.start.getDate() === date.getDate() ){
                 filterDates.push(appointment);              
             }
         }

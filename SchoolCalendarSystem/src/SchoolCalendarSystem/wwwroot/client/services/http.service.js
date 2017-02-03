@@ -36,6 +36,7 @@ var HttpService = (function () {
             .catch(function (error) { return _this.parseErrorMsg(error); });
     };
     HttpService.prototype.parseErrorMsg = function (error) {
+        alert(error);
         var errMsg;
         if (error instanceof http_1.Response) {
             var body = error.json() || '';
@@ -45,7 +46,6 @@ var HttpService = (function () {
         else {
             errMsg = error.message ? error.message : error.toString();
         }
-        console.error(errMsg);
         return Observable_1.Observable.throw(errMsg);
     };
     HttpService.prototype.convertToJsonResponse = function (res) {

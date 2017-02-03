@@ -9,7 +9,7 @@ import { AppointmentComponent } from "./components/appointment/appointment.compo
 import { CalendarComponent } from "./components/calendar/calendar.component";
 import NavMenuComponent  from "./components/navmenu/navmenu.component";
 import LoginComponent from './components/login/login.component';
-import  ToastComponent from "./components/toast/toast.component";
+import  AlertComponent from "./components/alert/alert.component";
 import { UnlessDirective} from "./directives/alert.directive";
 
 const appRoutes: Routes = [
@@ -22,7 +22,7 @@ const appRoutes: Routes = [
 
 @NgModule({
     imports: [BrowserModule, HttpModule,ReactiveFormsModule,RouterModule.forRoot(appRoutes),NKDatetimeModule],
-    declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent, LoginComponent, ToastComponent, UnlessDirective],   
+    declarations: [AppComponent, AppointmentComponent, CalendarComponent, NavMenuComponent, LoginComponent, AlertComponent, UnlessDirective],   
     bootstrap: [AppComponent]
 })
 

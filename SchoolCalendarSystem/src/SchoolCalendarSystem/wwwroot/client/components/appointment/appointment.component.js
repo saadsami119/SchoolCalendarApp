@@ -10,11 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require("@angular/core");
 var forms_1 = require("@angular/forms");
-var toast_model_1 = require("../../models/toast.model");
 var appointment_model_1 = require("../../models/appointment.model");
 var appointment_service_1 = require("../../services/appointment.service");
 var auth_service_1 = require("../../services/auth.service");
 var router_service_1 = require("../../services/router.service");
+var alert_model_1 = require("../../models/alert.model");
 var AppointmentComponent = (function () {
     function AppointmentComponent(formBuilder, appointmentService, authService, routerService) {
         this.formBuilder = formBuilder;
@@ -32,23 +32,35 @@ var AppointmentComponent = (function () {
             startTime: [null, forms_1.Validators.required],
             endDate: [null, forms_1.Validators.required],
             endTime: [null, forms_1.Validators.required],
-            description: [null, forms_1.Validators.required]
+            description: ''
         });
-        this.toast = new toast_model_1.default();
+        this.startDatePickerOption = {
+            startDate: new Date(2016, 5, 10),
+            autoclose: true,
+            todayBtn: 'linked',
+            todayHighlight: true,
+            assumeNearbyYear: true,
+            format: 'D, d MM yyyy',
+            placeholder: 'Start on'
+        };
+        this.alerts = new Array();
     };
     AppointmentComponent.prototype.createAppointment = function (appoinmentVm, isValid) {
         var _this = this;
-        var time = appoinmentVm.startDate.getTime();
-        appoinmentVm.startDate.setTime(time);
-        time = appoinmentVm.endTime.getTime();
-        appoinmentVm.endDate.setTime(time);
-        var appointment = new appointment_model_1.default(appoinmentVm.startDate, appoinmentVm.endDate, appoinmentVm.description);
+        var hours = appoinmentVm.startTime.getHours();
+        var minutes = appoinmentVm.startTime.getMinutes();
+        appoinmentVm.startDate.setHours(hours);
+        appoinmentVm.startDate.setMinutes(minutes);
+        hours = appoinmentVm.endTime.getHours();
+        minutes = appoinmentVm.endDate.getMinutes();
+        appoinmentVm.endDate.setHours(hours);
+        appoinmentVm.endDate.setHours(minutes);
+        var appointment = new appointment_model_1.default(appoinmentVm.startDate, appoinmentVm.endDate, appoinmentVm.description, this.authService.getLogedInUserId());
         this.appointmentService.createNewAppointment(appointment)
             .subscribe(function (__) {
-            _this.toast.successToast("Appointment is created!", "Info!");
+            _this.alerts.push(new alert_model_1.default("Appointment has been created !", "success", "Success !"));
         }, function (error) {
-            alert(error);
-            _this.toast.errorToast(error, "Error!");
+            _this.alerts.push(new alert_model_1.default(error, "error", "Failure !"));
         });
     };
     return AppointmentComponent;

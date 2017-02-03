@@ -1,66 +1,81 @@
 ﻿import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
-import {UiToast}  from "../../interfaces/toast.interface";
-import  Toast  from "../../models/toast.model";
-import  Appointment  from "../../models/appointment.model";
-import  AppointmentService  from "../../services/appointment.service";
-import  AuthService  from '../../services/auth.service';
-import  RouterService  from "../../services/router.service";
+import Appointment from "../../models/appointment.model";
+import AppointmentService from "../../services/appointment.service";
+import AuthService from '../../services/auth.service';
+import RouterService from "../../services/router.service";
+import Alert from "../../models/alert.model"
 
 @Component({
     moduleId: module.id,
     selector: "appoitnment",
-    templateUrl: "appointment.component.html"    
+    templateUrl: "appointment.component.html"
 })
 
-export class AppointmentComponent implements OnInit, UiToast {
+export class AppointmentComponent implements OnInit {
     appointmentForm: FormGroup;
-    toast: Toast;
+    startDatePickerOption: any;
+    alerts: Array<Alert>;
 
     constructor(private formBuilder: FormBuilder,
         private appointmentService: AppointmentService,
         private authService: AuthService,
-        private routerService: RouterService) {                    
-            if (!this.authService.isUserLoggedIn()) {
+        private routerService: RouterService) {
+        if (!this.authService.isUserLoggedIn()) {
             this.routerService.navigateToRoute("login");
             return;
         }
     }
 
-    ngOnInit() {                
+    ngOnInit() {
         this.appointmentForm = this.formBuilder.group({
             startDate: [null, Validators.required],
             startTime: [null, Validators.required],
             endDate: [null, Validators.required],
             endTime: [null, Validators.required],
-            description: [null, Validators.required]
+            description: ''
+            //description: ['', Validators.required]
         });
 
-        this.toast = new Toast();
+        this.startDatePickerOption = {
+            startDate: new Date(2016, 5, 10),
+            autoclose: true,
+            todayBtn: 'linked',
+            todayHighlight: true,
+            assumeNearbyYear: true,
+            format: 'D, d MM yyyy',
+            placeholder:'Start on'
+        }
+        this.alerts = new Array<Alert>();
     }
 
     createAppointment(appoinmentVm: AppointmentViewModel, isValid: boolean): void {
 
-        let time: number = appoinmentVm.startDate.getTime();
-        appoinmentVm.startDate.setTime(time);
+        let hours: number = appoinmentVm.startTime.getHours();
+        let minutes: number = appoinmentVm.startTime.getMinutes();
 
-        time = appoinmentVm.endTime.getTime();
-        appoinmentVm.endDate.setTime(time);
+        appoinmentVm.startDate.setHours(hours);
+        appoinmentVm.startDate.setMinutes(minutes);
 
-        let appointment: Appointment = new Appointment(appoinmentVm.startDate, appoinmentVm.endDate, appoinmentVm.description);
+        hours = appoinmentVm.endTime.getHours();
+        minutes = appoinmentVm.endDate.getMinutes();
+
+        appoinmentVm.endDate.setHours(hours);
+        appoinmentVm.endDate.setHours(minutes);
+
+        let appointment: Appointment = new Appointment(appoinmentVm.startDate,
+            appoinmentVm.endDate,
+            appoinmentVm.description,
+            this.authService.getLogedInUserId());
 
         this.appointmentService.createNewAppointment(appointment)
             .subscribe(__ => {
-                this.toast.successToast("Appointment is created!", "Info!");
+                this.alerts.push(new Alert("Appointment has been created !", "success", "Success !"));
             }, error => {
-                alert(error); this.toast.errorToast(error, "Error!");
+                this.alerts.push(new Alert(error, "error", "Failure !"));
             });
-   
+    }
 
-
- }
-
-    
 }
 
 export class AppointmentViewModel {
