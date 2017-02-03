@@ -34,15 +34,6 @@ var AppointmentComponent = (function () {
             endTime: [null, forms_1.Validators.required],
             description: ''
         });
-        this.startDatePickerOption = {
-            startDate: new Date(2016, 5, 10),
-            autoclose: true,
-            todayBtn: 'linked',
-            todayHighlight: true,
-            assumeNearbyYear: true,
-            format: 'D, d MM yyyy',
-            placeholder: 'Start on'
-        };
         this.alerts = new Array();
     };
     AppointmentComponent.prototype.createAppointment = function (appoinmentVm, isValid) {

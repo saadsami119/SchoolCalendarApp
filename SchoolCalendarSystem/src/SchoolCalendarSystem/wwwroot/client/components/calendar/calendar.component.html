@@ -1,5 +1,5 @@
-﻿<div class="col-md-10 col-md-offset-1">
-    <div class="col-md-offset-5">
+﻿<div class="col-md-10">
+    <div class="col-md-offset-6">
         <nav aria-label="Page navigation">
             <ul class="pagination">
                 <li>
@@ -7,118 +7,131 @@
                 </li>
                 <li>
                     <a class="text-center" style="width: 150px">{{currentMonthName}} , {{currentYear}} </a>
-</li>
-<li><a aria-label="Next" (click)="initCalendarForNextMonth()"><span aria-hidden="true">&raquo;</span> </a></li>
-</ul>
-</nav>
-</div>
+                </li>
+                <li><a aria-label="Next" (click)="initCalendarForNextMonth()"><span aria-hidden="true">&raquo;</span> </a></li>
+            </ul>
+        </nav>
+    </div>
 </div>
 
-
-
-
-<div class="container">
-    <div class="well infobox">
-        <div class="table table-responsive">
-            <table class="table table-bordered table-condensed">
-                <thead>
-                    <tr>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednesday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                        <th>Saturday</th>
-                        <th>Sunday</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let week of calendarMonth.weeks">
-                        <td>
-                            <div class="calendar-date-box">
-                                <p class="text-center calendar-date-text">{{week.monday?.day}}</p>
-                                <div *ngIf="week.monday?.totalAppintments > 0" class="text-center">
-                                    <a (click)="filterAllAppointmentsForDate(week.monday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"> {{week.monday.totalAppintments}} appointments</a>
-</div>
-</div>
-</td>
-
-<td>
-    <div class="calendar-date-box">
-        <p class="text-center calendar-date-text">{{week.tuesday?.day}}</p>
-        <div *ngIf="week.tuesday?.totalAppintments > 0" class="text-center">
-            <a (click)="filterAllAppointmentsForDate(week.tuesday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"> {{week.tuesday.totalAppintments}} appointments
-</a>
-</div>
-</div>
-</td>
-
-<td>
-    <div class="calendar-date-box">
-        <p class="text-center calendar-date-text">{{week.wednesday?.day}}</p>
-        <div *ngIf="week.wednesday?.totalAppintments > 0" class="text-center">
-            <a (click)="filterAllAppointmentsForDate(week.wednesday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"> {{week.wednesday.totalAppintments}} appointments
-</a>
-</div>
-</div>
-</td>
-
-<td>
-    <div class="calendar-date-box">
-        <p class="text-center calendar-date-text">{{week.thursday?.day}}</p>
-        <div *ngIf="week.thursday?.totalAppintments > 0" class="text-center">
-            <a (click)="filterAllAppointmentsForDate(week.thursday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"> {{week.thursday.totalAppintments}} appointments
-</a>
-</div>
-</div>
-</td>
-
-<td>
-    <div class="calendar-date-box">
-        <p class="text-center calendar-date-text">{{week.friday?.day}}</p>
-        <div *ngIf="week.friday?.totalAppintments > 0" class="text-center">
-            <a (click)="filterAllAppointmentsForDate(week.friday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"> {{week.friday.totalAppintments}} appointments
-</a>
-</div>
-</div>
-</td>
-
-<td>
-    <div class="calendar-date-box">
-        <p class="text-center calendar-date-text">{{week.saturday?.day}}</p>
-        <div *ngIf="week.saturday?.totalAppintments > 0" class="text-center">
-            <a (click)="filterAllAppointmentsForDate(week.saturday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"> {{week.saturday.totalAppintments}} appointments
-</a>
-</div>
-</div>
-</td>
-
-<td>
-    <div class="calendar-date-box">
-        <p class="text-center calendar-date-text">{{week.sunday?.day}}</p>
-        <div *ngIf="week.sunday?.totalAppintments > 0" class="text-center">
-            <a (click)="filterAllAppointmentsForDate(week.sunday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"> {{week.sunday.totalAppintments}} appointments
-</a>
-</div>
-</div>
-</td>
-</tr>
-</tbody>
-</table>
-
-</div>
-</div>
-</div>
 
 
 
 
 <div class="container">
-    <div class="well infobox">
-        <div class="panel panel-info">
-            <div class="panel-heading"> Appointments ( {{selectedDate}} )</div>
-            <div class="panel-body  div-lg scroll">
-                <div class="table table-bordered table-responsive" >
+    <div class="well">
+
+        <table class="table table-bordered table-condensed ">
+            <thead>
+                <tr>
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let week of calendarMonth.weeks">
+
+                    <td>
+                        <div class="calendar-date-box">
+                            <p class="text-center calendar-date-text">{{week.monday?.day}}</p>
+                            <div *ngIf="week.monday?.totalAppintments > 0" class="text-center">
+                                <a (click)="filterAllAppointmentsForDate(week.monday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0" data-toggle="modal"
+                                    data-target="#myModal">
+                                    {{week.monday.totalAppintments}} appointments</a>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="calendar-date-box">
+                            <p class="text-center calendar-date-text">{{week.tuesday?.day}}</p>
+                            <div *ngIf="week.tuesday?.totalAppintments > 0" class="text-center">
+                                <a (click)="filterAllAppointmentsForDate(week.tuesday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"
+                                    data-toggle="modal" data-target="#myModal">
+                                    {{week.tuesday.totalAppintments}} appointments </a>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="calendar-date-box">
+                            <p class="text-center calendar-date-text">{{week.wednesday?.day}}</p>
+                            <div *ngIf="week.wednesday?.totalAppintments > 0" class="text-center">
+                                <a (click)="filterAllAppointmentsForDate(week.wednesday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"
+                                    data-toggle="modal" data-target="#myModal">
+                                    {{week.wednesday.totalAppintments}} appointments</a>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="calendar-date-box">
+                            <p class="text-center calendar-date-text">{{week.thursday?.day}}</p>
+                            <div *ngIf="week.thursday?.totalAppintments > 0" class="text-center">
+                                <a (click)="filterAllAppointmentsForDate(week.thursday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"
+                                    data-toggle="modal" data-target="#myModal">
+                                    {{week.thursday.totalAppintments}} appointments </a>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="calendar-date-box">
+                            <p class="text-center calendar-date-text">{{week.friday?.day}}</p>
+                            <div *ngIf="week.friday?.totalAppintments > 0" class="text-center">
+                                <a (click)="filterAllAppointmentsForDate(week.friday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0" data-toggle="modal"
+                                    data-target="#myModal">
+                                    {{week.friday.totalAppintments}} appointments</a>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="calendar-date-box">
+                            <p class="text-center calendar-date-text">{{week.saturday?.day}}</p>
+                            <div *ngIf="week.saturday?.totalAppintments > 0" class="text-center">
+                                <a (click)="filterAllAppointmentsForDate(week.saturday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0"
+                                    data-toggle="modal" data-target="#myModal">
+                                    {{week.saturday.totalAppintments}} appointments</a>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td>
+                        <div class="calendar-date-box">
+                            <p class="text-center calendar-date-text">{{week.sunday?.day}}</p>
+                            <div *ngIf="week.sunday?.totalAppintments > 0" class="text-center">
+                                <a (click)="filterAllAppointmentsForDate(week.sunday.date)" class="btn btn-success btn-xs" style="padding: 0;margin: 0" data-toggle="modal"
+                                    data-target="#myModal">
+                                    {{week.sunday.totalAppintments}} appointments</a>
+                            </div>
+                        </div>
+                    </td>
+
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <u>
+                    <h4 class="modal-title"> {{selectedDate}} </h4>
+                </u>
+            </div>
+            <div class="modal-body">
+                <table class="table">
                     <thead>
                         <tr>
                             <td> Start at </td>
@@ -132,15 +145,21 @@
                                 {{appointment.start.toLocaleTimeString()}}
                             </td>
                             <td>
-                                {{ appointment.start.getDate() === appointment.end.getDate() ? appointment.end.toGMTString().slice(0, -4) : appointment.end.toLocaleTimeString() }}
+                                {{ appointment.start.getDate() === appointment.end.getDate() ? appointment.end.toGMTString().slice(0, -4) : appointment.end.toLocaleTimeString()
+                                }}
                             </td>
                             <td>
                                 {{appointment.description}}
                             </td>
                         </tr>
                     </tbody>
-                </div>
+                </table>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             </div>
         </div>
+
     </div>
 </div>

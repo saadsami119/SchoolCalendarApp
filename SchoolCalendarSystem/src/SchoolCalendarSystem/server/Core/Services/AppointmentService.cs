@@ -27,14 +27,15 @@ namespace SchoolCalendarSystem.server.Core.Services
             this._uow.SaveChanges();
         }
 
-        public IEnumerable<Appointment> GetMonthlyAppointments(int month , int year)
+        public IEnumerable<Appointment> GetMonthlyAppointmentsForUser(int month , int year, int userId)
         {
             var totalDaysInMonth = DateTime.DaysInMonth(year, month);
             var startDate = new DateTime(year,month,01);
             var endDate = new DateTime(year,month,totalDaysInMonth);
                    
             return this._appointmentRepository
-                    .Get(x=>x.StartDateTime >= startDate && x.StartDateTime <= endDate)
+                    .Get(x=>x.StartDateTime >= startDate && x.StartDateTime <= endDate
+                            && x.UserId == userId)
                     .OrderBy(a=>a.StartDateTime);           
             
         }

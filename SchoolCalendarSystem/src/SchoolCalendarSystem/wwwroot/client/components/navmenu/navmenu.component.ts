@@ -14,7 +14,9 @@ export default class NavMenuComponent implements OnInit{
 
     ngOnInit(){
         this.loginedInUserName = this.authService.getLoginUserName();
+    }
 
+    onLogOut(){
 
     }
 

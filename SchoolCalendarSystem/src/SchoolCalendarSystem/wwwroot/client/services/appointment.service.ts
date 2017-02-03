@@ -14,13 +14,16 @@ export default class AppointmentService {
         return this.httpService.post("/api/appointment/", appointment);
     }
 
-    getAppointmentsForMonth(month : number , year : number) : Observable<Appointment[]>{
-        let url : string = "/api/appointment/month/"+ month + "/year/" + year;     
+    getAppointmentsForMonthForUser(month : number , year : number , userId : number) : Observable<Appointment[]>{
+        let url : string = "/api/appointment/user/"+userId+"/month/"+ month + "/year/" + year;     
         let appointmentsObservable =  this.httpService.get(url)
             .map(appointments=>{
                    let monthlyAppointments = new Array<Appointment>();
                     for (let appointment  of appointments){
-                       monthlyAppointments.push(new Appointment(new Date(appointment.startDateTime) , new Date(appointment.endDateTime),  appointment.description));                       
+                       monthlyAppointments.push(new Appointment(new Date(appointment.startDateTime) , 
+                                                                new Date(appointment.endDateTime),  
+                                                                appointment.description,
+                                                                appointment.userId));                       
                     }
             return monthlyAppointments;
         });      

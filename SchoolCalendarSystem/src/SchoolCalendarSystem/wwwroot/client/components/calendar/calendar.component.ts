@@ -24,14 +24,15 @@ export class CalendarComponent implements OnInit {
 
     constructor(private authService: AuthService,
         private appointmentService: AppointmentService,
-        private calendarService: CalendarService) {
+        private calendarService: CalendarService,
+        private routerService: RouterService) {
     }
 
     ngOnInit() {
-        //   if (!this.authService.isUserAuthenticated()) {
-        //     //this.routerService.navigateToRoute("login");
-        //     return;
-        // }
+          if (!this.authService.isUserLoggedIn()) {
+            this.routerService.navigateToRoute("login");
+            return;
+        }
         this.calendarMonth = new CalendarMonth();
         this._currentMonth = this.getCurrentMonth();
         this.currentMonthName = this.getCurrentMonthName();
@@ -41,7 +42,7 @@ export class CalendarComponent implements OnInit {
     }
 
     initilizeMonthlyCalendar(): void {
-        this.appointmentService.getAppointmentsForMonth(this._currentMonth + 1, this.currentYear)
+        this.appointmentService.getAppointmentsForMonthForUser(this._currentMonth + 1, this.currentYear,this.authService.getLogedInUserId())
             .subscribe(monthlyAppointments => {
                 this.appointmentPerMonth = new Array<Appointment>();
                 this.appointmentPerMonth = monthlyAppointments;

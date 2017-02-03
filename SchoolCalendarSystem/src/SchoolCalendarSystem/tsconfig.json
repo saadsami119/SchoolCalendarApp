@@ -3,7 +3,7 @@
   "compilerOptions": {
      "target": "es5",
      "module": "commonjs",
-     "watch": true,
+      "watch": true,
      "moduleResolution": "node",
      "sourceMap": true,
      "emitDecoratorMetadata": true,

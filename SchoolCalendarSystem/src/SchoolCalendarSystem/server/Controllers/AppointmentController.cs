@@ -31,10 +31,10 @@ namespace SchoolCalendarSystem.server.Controllers
         }
 
         
-        [HttpGet("month/{month}/year/{year}")]
-        public IActionResult GetAppointments(int month, int year)
+        [HttpGet("user/{userid}/month/{month}/year/{year}")]
+        public IActionResult GetAppointments(int month, int year, int userid)
         {
-           var appointments =  this._appointmentService.GetMonthlyAppointments(month,year);
+           var appointments =  this._appointmentService.GetMonthlyAppointmentsForUser(month,year, userid);
            return Json(new JsonResponse { Data = appointments , Successful = true, Error = string.Empty });            
         }
     }

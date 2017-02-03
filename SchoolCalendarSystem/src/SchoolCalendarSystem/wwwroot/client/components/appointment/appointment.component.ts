@@ -13,8 +13,7 @@ import Alert from "../../models/alert.model"
 })
 
 export class AppointmentComponent implements OnInit {
-    appointmentForm: FormGroup;
-    startDatePickerOption: any;
+    appointmentForm: FormGroup;  
     alerts: Array<Alert>;
 
     constructor(private formBuilder: FormBuilder,
@@ -33,19 +32,9 @@ export class AppointmentComponent implements OnInit {
             startTime: [null, Validators.required],
             endDate: [null, Validators.required],
             endTime: [null, Validators.required],
-            description: ''
-            //description: ['', Validators.required]
+            description: ''           
         });
-
-        this.startDatePickerOption = {
-            startDate: new Date(2016, 5, 10),
-            autoclose: true,
-            todayBtn: 'linked',
-            todayHighlight: true,
-            assumeNearbyYear: true,
-            format: 'D, d MM yyyy',
-            placeholder:'Start on'
-        }
+      
         this.alerts = new Array<Alert>();
     }
 

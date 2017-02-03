@@ -17,6 +17,8 @@ var NavMenuComponent = (function () {
     NavMenuComponent.prototype.ngOnInit = function () {
         this.loginedInUserName = this.authService.getLoginUserName();
     };
+    NavMenuComponent.prototype.onLogOut = function () {
+    };
     return NavMenuComponent;
 }());
 NavMenuComponent = __decorate([

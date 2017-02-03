@@ -18,14 +18,14 @@ var AppointmentService = (function () {
     AppointmentService.prototype.createNewAppointment = function (appointment) {
         return this.httpService.post("/api/appointment/", appointment);
     };
-    AppointmentService.prototype.getAppointmentsForMonth = function (month, year) {
-        var url = "/api/appointment/month/" + month + "/year/" + year;
+    AppointmentService.prototype.getAppointmentsForMonthForUser = function (month, year, userId) {
+        var url = "/api/appointment/user/" + userId + "/month/" + month + "/year/" + year;
         var appointmentsObservable = this.httpService.get(url)
             .map(function (appointments) {
             var monthlyAppointments = new Array();
             for (var _i = 0, appointments_1 = appointments; _i < appointments_1.length; _i++) {
                 var appointment = appointments_1[_i];
-                monthlyAppointments.push(new appointment_model_1.default(new Date(appointment.startDateTime), new Date(appointment.endDateTime), appointment.description));
+                monthlyAppointments.push(new appointment_model_1.default(new Date(appointment.startDateTime), new Date(appointment.endDateTime), appointment.description, appointment.userId));
             }
             return monthlyAppointments;
         });

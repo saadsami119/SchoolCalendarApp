@@ -13,17 +13,19 @@ var core_1 = require("@angular/core");
 var auth_service_1 = require("../../services/auth.service");
 var appointment_service_1 = require("../../services/appointment.service");
 var calendar_service_1 = require("../../services/calendar.service");
+var router_service_1 = require("../../services/router.service");
 var CalendarComponent = (function () {
-    function CalendarComponent(authService, appointmentService, calendarService) {
+    function CalendarComponent(authService, appointmentService, calendarService, routerService) {
         this.authService = authService;
         this.appointmentService = appointmentService;
         this.calendarService = calendarService;
+        this.routerService = routerService;
     }
     CalendarComponent.prototype.ngOnInit = function () {
-        //   if (!this.authService.isUserAuthenticated()) {
-        //     //this.routerService.navigateToRoute("login");
-        //     return;
-        // }
+        if (!this.authService.isUserLoggedIn()) {
+            this.routerService.navigateToRoute("login");
+            return;
+        }
         this.calendarMonth = new calendarMonth_model_1.default();
         this._currentMonth = this.getCurrentMonth();
         this.currentMonthName = this.getCurrentMonthName();
@@ -32,7 +34,7 @@ var CalendarComponent = (function () {
     };
     CalendarComponent.prototype.initilizeMonthlyCalendar = function () {
         var _this = this;
-        this.appointmentService.getAppointmentsForMonth(this._currentMonth + 1, this.currentYear)
+        this.appointmentService.getAppointmentsForMonthForUser(this._currentMonth + 1, this.currentYear, this.authService.getLogedInUserId())
             .subscribe(function (monthlyAppointments) {
             _this.appointmentPerMonth = new Array();
             _this.appointmentPerMonth = monthlyAppointments;
@@ -90,7 +92,8 @@ CalendarComponent = __decorate([
     }),
     __metadata("design:paramtypes", [auth_service_1.default,
         appointment_service_1.default,
-        calendar_service_1.default])
+        calendar_service_1.default,
+        router_service_1.default])
 ], CalendarComponent);
 exports.CalendarComponent = CalendarComponent;
 //# sourceMappingURL=calendar.component.js.map
